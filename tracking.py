@@ -624,7 +624,7 @@ if user_input and not st.session_state.submitted:
                         # PayNow QR Code section
                         st.markdown("""
                             <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 1rem; border-radius: 15px; text-align: center; margin-bottom: 1rem;">
-                                <p><strong>💰 PayNow to UEN: 123456789A</strong></p>
+                                <p><strong>💰 PayNow/Paylah to: 80131019</strong></p>
                                 <p>or scan QR code:</p>
                                 <div style="background: white; width: 150px; height: 150px; margin: 0 auto; display: flex; align-items: center; justify-content: center; border-radius: 10px;">
                                     <span style="color: #666;">[QR Code]</span>
