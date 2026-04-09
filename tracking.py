@@ -750,11 +750,11 @@ else:
             <div class="welcome-title">welcome to leehoney's mart.°•</div>
             <p>check your order status and submit collection requests here!</p>
             <hr>
-            <p>𓇼 website works bet with light mode! click on the 3 dots on the top right to adjust! </p>
-            <p>𓇼 please read details on the side bar first before filling up the form!</p>
-            <p>𓇼 please collect your items within 3 weeks of notification! </p>
-            <p>𓇼 consolidation limited to maximum 2 batches! </p>
-            <p>𓇼 late fee of $1/day applies after 3 weeks!</p>
+            <p style="font-size: 14px; margin-top: 5px;>𓇼 website works bet with light mode! click on the 3 dots on the top right to adjust! </p>
+            <p style="font-size: 14px; margin-top: 5px;>𓇼 please read details on the side bar first before filling up the form!</p>
+            <p style="font-size: 14px; margin-top: 5px;>𓇼 please collect your items within 3 weeks of notification! </p>
+            <p style="font-size: 14px; margin-top: 5px;>𓇼 consolidation limited to maximum 2 batches! </p>
+            <p style="font-size: 14px; margin-top: 5px;>𓇼 late fee of $1/day applies after 3 weeks!</p>
         </div>
     """, unsafe_allow_html=True)
 
