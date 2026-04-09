@@ -390,18 +390,40 @@ if user_input and not st.session_state.submitted:
                 user_data['Second_Payment'] = pd.to_numeric(user_data['Second_Payment'], errors='coerce').fillna(0)
                 user_data['Total_Due'] = user_data['Second_Payment'] + user_data['Late_Fee']
                 
-                total_2nd = user_data['Second_Payment'].sum()
-                total_late = user_data['Late_Fee'].sum()
-                total_due = user_data['Total_Due'].sum()
-                
-                # Filter based on Status column (ready for collection vs not)
+                # NEW: Filter based on Status AND Payment_Status (Complete/Incomplete)
                 user_data['Status_Str'] = user_data['Status'].astype(str).str.lower().str.strip()
-                ready_orders = user_data[user_data['Status_Str'] == 'ready for collection'].copy()
-                pending_orders = user_data[user_data['Status_Str'] != 'ready for collection'].copy()
+                
+                # Handle Payment_Status column (default to "incomplete" if column doesn't exist)
+                if 'Payment_Status' in user_data.columns:
+                    user_data['Payment_Status_Str'] = user_data['Payment_Status'].astype(str).str.lower().str.strip()
+                else:
+                    # If column doesn't exist, assume all are incomplete
+                    user_data['Payment_Status_Str'] = 'incomplete'
+                
+                # Ready for collection AND not complete (incomplete)
+                ready_orders = user_data[
+                    (user_data['Status_Str'] == 'ready for collection') & 
+                    (user_data['Payment_Status_Str'] != 'complete')
+                ].copy()
+                
+                # Pending arrival (not ready yet) AND not complete
+                pending_orders = user_data[
+                    (user_data['Status_Str'] != 'ready for collection') & 
+                    (user_data['Payment_Status_Str'] != 'complete')
+                ].copy()
+                
+                # Complete items (hidden from user but kept in spreadsheet)
+                complete_orders = user_data[user_data['Payment_Status_Str'] == 'complete'].copy()
+                
+                # Calculate totals for INCOMPLETE items only
+                incomplete_data = user_data[user_data['Payment_Status_Str'] != 'complete']
+                total_2nd = incomplete_data['Second_Payment'].sum()
+                total_late = incomplete_data['Late_Fee'].sum()
+                total_due = incomplete_data['Total_Due'].sum()
                 
                 # Show toggle button centered if there are pending orders
-                if len(pending_orders) > 0:
-                    # Centered See All Orders button with minimal spacing
+                if len(pending_orders) > 0 or len(ready_orders) > 0:
+                    # Centered See All Orders button
                     col_empty1, col_btn, col_empty2 = st.columns([1, 2, 1])
                     with col_btn:
                         if not st.session_state.show_all_orders:
@@ -413,22 +435,23 @@ if user_input and not st.session_state.submitted:
                                 st.session_state.show_all_orders = False
                                 st.rerun()
                     
-                    # Centered badges below the button - responsive spacing
+                    # Centered badges below the button
                     st.markdown(f"""
                         <div class="badge-container">
                             <span class="info-badge">✅ {len(ready_orders)} ready for collection</span>
                             <span class="info-badge">⏳ {len(pending_orders)} pending arrival</span>
+                            <span class="info-badge">🎉 {len(complete_orders)} completed</span>
                         </div>
                     """, unsafe_allow_html=True)
                 
                 # Determine which data to display in table
                 if st.session_state.show_all_orders:
                     display_data = user_data.copy()
-                    if len(pending_orders) > 0:
+                    if len(pending_orders) > 0 or len(complete_orders) > 0:
                         st.info(f"🐙 Showing all {len(user_data)} orders")
                 else:
                     display_data = ready_orders.copy()
-                    if len(ready_orders) == 0 and len(pending_orders) > 0:
+                    if len(ready_orders) == 0 and (len(pending_orders) > 0 or len(complete_orders) > 0):
                         st.warning("🌊 No items are ready for collection yet! Click 'See All Orders' to view all your orders.")
                 
                 # 4. Table Display - Full table with all columns
@@ -455,7 +478,11 @@ if user_input and not st.session_state.submitted:
                     
                     st.dataframe(clean_table, use_container_width=True, hide_index=True)
                 
-                # Payment Summary (based on ALL orders)
+                # Show completed items count if user wants to see
+                if len(complete_orders) > 0 and st.session_state.show_all_orders:
+                    st.success(f"🎉 {len(complete_orders)} item(s) have been completed and paid for!")
+                
+                # Payment Summary (based on INCOMPLETE orders only)
                 st.markdown("### 💰 Payment Summary")
                 col1, col2, col3 = st.columns(3)
                 
@@ -482,7 +509,7 @@ if user_input and not st.session_state.submitted:
                 with col3:
                     st.markdown(f"""
                         <div class="metric-card">
-                            <div style="font-size: 14px; color: #1ABC9C; margin-bottom: 10px;">🎯 Total Payment</div>
+                            <div style="font-size: 14px; color: #1ABC9C; margin-bottom: 10px;">🎯 Total Payment Due</div>
                             <div style="font-size: 28px; font-weight: bold; color: #1ABC9C;">${total_due:.2f}</div>
                             <div style="font-size: 12px; color: #5DADE2; margin-top: 5px;">💎 2nd Payment + Late Fee</div>
                         </div>
@@ -509,13 +536,13 @@ if user_input and not st.session_state.submitted:
                             st.rerun()
                     
                     with col_c:
-                        if st.button("🏠 Self-Collect\n", use_container_width=True):
+                        if st.button("🏠 Self-Collect\nFree", use_container_width=True):
                             st.session_state.collection_method = "Self-Collect"
                             st.session_state.specific_location = None
                             st.rerun()
                     
                     with col_d:
-                        if st.button("🤝 Meet-up\n", use_container_width=True):
+                        if st.button("🤝 Meet-up\nFree", use_container_width=True):
                             st.session_state.collection_method = "Meet-up"
                             st.session_state.specific_location = None
                             st.rerun()
@@ -650,7 +677,7 @@ if user_input and not st.session_state.submitted:
                             else:
                                 address = st.text_area("Address (Optional)", placeholder="Optional for reference", height=80)
                             
-                            # Items to collect - ONLY ready for collection items
+                            # Items to collect - ONLY ready for collection items (incomplete)
                             ready_items_list = "\n".join([f"- {row['Item_Name']} (Qty: {row['Qty']})" for _, row in ready_orders.iterrows()])
                             st.text_area("Items to Collect (Ready for Collection)", value=ready_items_list, disabled=True, height=120)
                             
@@ -711,7 +738,10 @@ if user_input and not st.session_state.submitted:
                                     else:
                                         st.error("Failed to submit. Please contact @ajelsss directly.")
                 else:
-                    st.info("🌊 No items are ready for collection yet. Check back later!")
+                    if len(complete_orders) > 0:
+                        st.info("🎉 All your items have been completed! Thank you for your payment.")
+                    else:
+                        st.info("🌊 No items are ready for collection yet. Check back later!")
                 
             else:
                 st.markdown(f"""
