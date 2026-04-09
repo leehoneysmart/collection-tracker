@@ -674,7 +674,7 @@ if user_input and not st.session_state.submitted:
                             if st.session_state.collection_method in ["Tracked Envelope", "Tracked Box"]:
                                 proof_file = st.file_uploader("Upload Transaction Proof (Screenshot) *", type=['png', 'jpg', 'jpeg', 'pdf'])
                             else:
-                                proof_file = st.file_uploader("Upload Transaction Proof (Optional for self-collect/meet-up)", type=['png', 'jpg', 'jpeg', 'pdf'])
+                                proof_file = st.file_uploader("Upload Transaction Proof", type=['png', 'jpg', 'jpeg', 'pdf'])
                             
                             # Note
                             note = st.text_area("Note (Optional)", placeholder="e.g., collecting with friend, special requests, etc.")
