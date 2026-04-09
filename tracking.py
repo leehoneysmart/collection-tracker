@@ -345,7 +345,7 @@ def load_data():
             csv_url = "https://docs.google.com/spreadsheets/d/1ZhOdFDh33lcIp7yzj9KoeaNdJhKziEXxUGDNHD3ISXQ/export?format=csv&gid=0"
             return pd.read_csv(csv_url)
     except Exception as e:
-        st.error(f"Error loading data. Please contact @ajelsss.")
+        st.error(f"Error loading data. Please contact @ajelsssss.")
         return None
 
 # Function to get shipping cost
@@ -359,7 +359,7 @@ def get_shipping_cost(method):
 
 # Search
 st.markdown("### 🔍 Find Your Orders")
-user_input = st.text_input("Username", placeholder="🐠 Enter telegram u/n (e.g: @ajelsss)", label_visibility="collapsed")
+user_input = st.text_input("Username", placeholder="🐠 Enter telegram u/n (e.g: @ajelsssss)", label_visibility="collapsed")
 
 # Initialize session state
 if 'submitted' not in st.session_state:
@@ -718,7 +718,7 @@ if user_input and not st.session_state.submitted:
                                         st.info("Thank you for your submission!")
                                         st.rerun()
                                     else:
-                                        st.error("Failed to submit. Please contact @ajelsss directly.")
+                                        st.error("Failed to submit. Please contact @ajelsssss directly.")
                 else:
                     st.info("🌊 No items are ready for collection yet. Check back later!")
                 
@@ -729,7 +729,7 @@ if user_input and not st.session_state.submitted:
                         Possible reasons:<br>
                         • Incorrect username (check spelling and include "@")<br>
                         • Items not ready for collection yet<br><br>
-                        Contact <strong>@ajelsss</strong> for assistance.
+                        Contact <strong>@ajelsssss</strong> for assistance.
                     </div>
                 """, unsafe_allow_html=True)
 
