@@ -495,39 +495,42 @@ st.markdown("""
         margin: 1.5rem;
     }
     
-    .welcome-box {
-        background: linear-gradient(135deg, rgba(69, 179, 225, 0.1) 0%, rgba(133, 193, 233, 0.2) 100%);
-        padding: 1.5rem;
-        border-radius: 20px;
-        text-align: center;
-        margin-top: 2rem;
-        border: 2px solid rgba(69, 179, 225, 0.3);
-    }
-    
-    .welcome-title {
-        font-family: 'Nunito', sans-serif;
-        font-weight: 700;
-        font-size: 20px;
-        color: #1B4F72;
-        text-align: center;
-        margin-top: 0;
-        margin-bottom: 0.5rem;
-        display: inline-block;
-        padding-bottom: 5px;
-    }
-    
-    .welcome-text {
-        font-size: 14px;
-        color: #2980B9;
-        margin: 0.8rem 0;
-        line-height: 1.5;
-    }
-    
-    .welcome-text-small {
-        font-size: 14px;
-        color: #2980B9;
-        margin: 0.8rem 0;
-        line-height: 1.5;
+    /* Light mode welcome box styles - only apply in light mode */
+    @media (prefers-color-scheme: light) {
+        .welcome-box {
+            background: linear-gradient(135deg, rgba(69, 179, 225, 0.1) 0%, rgba(133, 193, 233, 0.2) 100%);
+            padding: 1.5rem;
+            border-radius: 20px;
+            text-align: center;
+            margin-top: 2rem;
+            border: 2px solid rgba(69, 179, 225, 0.3);
+        }
+        
+        .welcome-title {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            color: #1B4F72;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+        
+        .welcome-text {
+            font-size: 14px;
+            color: #2980B9;
+            margin: 0.8rem 0;
+            line-height: 1.5;
+        }
+        
+        .welcome-text-small {
+            font-size: 14px;
+            color: #2980B9;
+            margin: 0.8rem 0;
+            line-height: 1.5;
+        }
     }
     
     .error-box-notfound {
