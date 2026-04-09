@@ -764,7 +764,7 @@ else:
             <div style="font-size: 40px;">🐠 🌊 🐙</div>
             <div class="welcome-title">welcome to leehoney's mart.°•</div>
             <p class="welcome-text">check your order status and submit collection requests here!</p>
-            <hr style="margin: 0.5rem 0;">
+            <hr style="margin: 0.5rem 0;"><br>
             <p class="welcome-text-small">𓇼 website works best with light mode! click on the 3 dots on the top right to adjust!</p>
             <p class="welcome-text-small">𓇼 please read details on the side bar first before filling up the form!</p>
             <p class="welcome-text-small">𓇼 please collect your items within 3 weeks of notification!</p>
