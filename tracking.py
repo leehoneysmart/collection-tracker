@@ -437,7 +437,7 @@ if user_input and not st.session_state.submitted:
                     display_df['Notification_Date'] = display_df['Notification_Date'].dt.strftime('%d %b %Y')
                     
                     # Columns to display
-                    desired_columns = ['Batch', 'Item_Name', 'Qty', 'Status', 'Notification_Date', 'Second_Payment', 'Late_Fee', 'Total_Due', 'Remarks']
+                    desired_columns = ['Batch', 'Item_Name', 'Qty', 'Status', 'Notification_Date', 'Second_Payment', 'Late_Fee', 'Total_Due', 'Payment_Status','Remarks']
                     available_columns = [col for col in desired_columns if col in display_df.columns]
                     
                     clean_table = display_df[available_columns].rename(columns={
@@ -445,7 +445,8 @@ if user_input and not st.session_state.submitted:
                         'Notification_Date': 'Collection Notification',
                         'Second_Payment': '2nd Payment',
                         'Late_Fee': 'Late Fee',
-                        'Total_Due': 'Total Due'
+                        'Total_Due': 'Total Due',
+                        'Payment_Status': 'Payment Status'
                     })
                     
                     # Format currency columns
