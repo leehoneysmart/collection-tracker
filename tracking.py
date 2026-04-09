@@ -61,14 +61,9 @@ st.markdown("""
         margin: 1rem 0;
         border: none;
         height: 2px;
-        background: linear-gradient(90deg, transparent, #85C1E9, transparent);
-    }
-    
-    @media (prefers-color-scheme: dark) {
-        .welcome-hr {
-            background: linear-gradient(90deg, transparent, #AED6F1, transparent);
-            height: 2px;
-        }
+        background-color: #85C1E9;
+        opacity: 0.7;
+        border-radius: 2px;
     }
     
     /* Dark mode detection */
@@ -101,19 +96,8 @@ st.markdown("""
         }
         
         .welcome-hr {
-            margin: 1rem 0;
-            border: none;
-            height: 2px;
-            background-color: #85C1E9;
-            opacity: 0.7;
-            border-radius: 2px;
-        }
-        
-        @media (prefers-color-scheme: dark) {
-            .welcome-hr {
-                background-color: #AED6F1;
-                opacity: 0.9;
-            }
+            background-color: #AED6F1;
+            opacity: 0.9;
         }
         
         /* Metric cards */
