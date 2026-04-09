@@ -84,46 +84,37 @@ st.markdown("""
             color: #76D7C4 !important;
         }
         
-/* Welcome box - IMPROVED DARK MODE VISIBILITY */
-.welcome-box {
-    background: linear-gradient(135deg, rgba(8, 30, 45, 0.98) 0%, rgba(15, 50, 70, 0.98) 100%) !important;
-    border: 2px solid rgba(93, 173, 226, 0.6) !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2) !important;
-}
-
-.welcome-title {
-    color: #85C1E9 !important;
-    font-size: 22px !important;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
-}
-
-.welcome-text {
-    font-size: 14px;
-    color: #D4EAF7 !important;
-    margin: 0.8rem 0;
-    line-height: 1.5;
-    font-weight: 500 !important;
-}
-
-.welcome-text-small {
-    font-size: 14px;
-    color: #C5E3F5 !important;
-    margin: 0.8rem 0;
-    line-height: 1.5;
-    font-weight: 400 !important;
-}
-
-/* Make the fish emojis and icons brighter */
-.welcome-box div[style*="font-size: 40px"] {
-    filter: brightness(1.1);
-    opacity: 0.95;
-}
-
-/* Welcome box horizontal rule in dark mode */
-.welcome-box hr {
-    border-color: #5DADE2 !important;
-    opacity: 0.5;
-}
+        /* Welcome box - ALTERNATIVE with better contrast */
+        .welcome-box {
+            background: rgba(8, 28, 40, 0.95) !important;
+            backdrop-filter: blur(2px) !important;
+            border: 2px solid rgba(93, 173, 226, 0.6) !important;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25) !important;
+        }
+        
+        .welcome-title {
+            color: #AED6F1 !important;
+            font-size: 22px !important;
+            font-weight: 800 !important;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !important;
+        }
+        
+        .welcome-text {
+            font-size: 14px;
+            color: #E8F4FD !important;
+            margin: 0.8rem 0;
+            line-height: 1.5;
+            font-weight: 500 !important;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1) !important;
+        }
+        
+        .welcome-text-small {
+            font-size: 14px;
+            color: #D6EAF8 !important;
+            margin: 0.8rem 0;
+            line-height: 1.5;
+            font-weight: 400 !important;
+        }
         
         /* Error box */
         .error-box-notfound {
