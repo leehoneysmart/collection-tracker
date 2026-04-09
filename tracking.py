@@ -10,15 +10,282 @@ from PIL import Image
 # Page Setup
 st.set_page_config(page_title="Collection Tracker", page_icon="🌊", layout="wide")
 
-# Custom CSS for Ocean Pastel Theme
+# Custom CSS for Ocean Pastel Theme with Dark Mode Support
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,700;1,700&display=swap');
     
+    /* Light mode (default) */
     .main {
         background: linear-gradient(135deg, #E8F4FD 0%, #D4EAF7 50%, #C5E3F5 100%);
     }
     
+    /* Dark mode detection */
+    @media (prefers-color-scheme: dark) {
+        .main {
+            background: linear-gradient(135deg, #0D2B40 0%, #123e5a 50%, #1a4a6e 100%);
+        }
+        
+        .block-container {
+            background: rgba(13, 43, 64, 0.6) !important;
+        }
+        
+        /* Metric cards */
+        .metric-card {
+            background: rgba(20, 50, 70, 0.95) !important;
+            border: 1px solid rgba(93, 173, 226, 0.3) !important;
+        }
+        
+        .metric-card div, .metric-card div div {
+            color: #E8F4FD !important;
+        }
+        
+        /* Info and success boxes */
+        .custom-info-box {
+            background: linear-gradient(135deg, #1B4F72 0%, #2471A3 100%) !important;
+            color: #E8F4FD !important;
+        }
+        
+        .custom-success-box {
+            background: linear-gradient(135deg, #0E6655 0%, #148F77 100%) !important;
+            color: white !important;
+        }
+        
+        .grand-total-box {
+            background: linear-gradient(135deg, #0E6655 0%, #117A65 100%) !important;
+            color: white !important;
+        }
+        
+        .grand-total-box small {
+            color: #AED6F1 !important;
+        }
+        
+        /* Form container */
+        .payment-form-container {
+            background: rgba(20, 50, 70, 0.7) !important;
+            border: 1px solid rgba(93, 173, 226, 0.3) !important;
+        }
+        
+        .payment-form-container label, 
+        .payment-form-container .stMarkdown,
+        .payment-form-container .stTextInput label {
+            color: #D4EAF7 !important;
+        }
+        
+        /* Badges */
+        .info-badge {
+            background: rgba(27, 79, 114, 0.6) !important;
+            color: #AED6F1 !important;
+        }
+        
+        .selected-method-badge {
+            background: rgba(26, 188, 156, 0.2) !important;
+            border: 1px solid rgba(26, 188, 156, 0.3) !important;
+            color: #76D7C4 !important;
+        }
+        
+        /* Welcome box */
+        .welcome-box {
+            background: linear-gradient(135deg, rgba(13, 43, 64, 0.85) 0%, rgba(20, 60, 80, 0.85) 100%) !important;
+            border: 2px solid rgba(93, 173, 226, 0.4) !important;
+        }
+        
+        .welcome-title {
+            color: #85C1E9 !important;
+        }
+        
+        .welcome-text, .welcome-text-small {
+            color: #D4EAF7 !important;
+        }
+        
+        /* Error box */
+        .error-box-notfound {
+            background: linear-gradient(135deg, rgba(88, 24, 24, 0.9) 0%, rgba(110, 30, 30, 0.9) 100%) !important;
+            border-left: 4px solid #E74C3C !important;
+            color: #FADBD8 !important;
+        }
+        
+        /* Buttons */
+        .stButton button {
+            background: linear-gradient(135deg, #2471A3 0%, #1A5276 100%) !important;
+            color: white !important;
+        }
+        
+        /* ========== FIX: Input fields - TEXT VISIBLE IN DARK MODE ========== */
+        /* Text input - regular */
+        .stTextInput input {
+            background: rgba(40, 70, 90, 0.95) !important;
+            border: 2px solid #5DADE2 !important;
+            color: #FFFFFF !important;
+            caret-color: #5DADE2 !important;
+        }
+        
+        .stTextInput input::placeholder {
+            color: #AED6F1 !important;
+            opacity: 0.7 !important;
+        }
+        
+        .stTextInput input:focus {
+            border-color: #85C1E9 !important;
+            background: rgba(40, 70, 90, 1) !important;
+            color: white !important;
+            box-shadow: 0 0 0 2px rgba(93, 173, 226, 0.2) !important;
+        }
+        
+        /* Text input - disabled */
+        .stTextInput input:disabled {
+            background: rgba(20, 45, 60, 0.8) !important;
+            color: #AED6F1 !important;
+            border-color: #2471A3 !important;
+        }
+        
+        /* Text area */
+        .stTextArea textarea {
+            background: rgba(40, 70, 90, 0.95) !important;
+            border: 2px solid #5DADE2 !important;
+            color: #FFFFFF !important;
+            caret-color: #5DADE2 !important;
+        }
+        
+        .stTextArea textarea::placeholder {
+            color: #AED6F1 !important;
+            opacity: 0.7 !important;
+        }
+        
+        .stTextArea textarea:focus {
+            border-color: #85C1E9 !important;
+            background: rgba(40, 70, 90, 1) !important;
+            color: white !important;
+            box-shadow: 0 0 0 2px rgba(93, 173, 226, 0.2) !important;
+        }
+        
+        /* Number input */
+        .stNumberInput input {
+            background: rgba(40, 70, 90, 0.95) !important;
+            border: 2px solid #5DADE2 !important;
+            color: #FFFFFF !important;
+        }
+        
+        .stNumberInput input::placeholder {
+            color: #AED6F1 !important;
+            opacity: 0.7 !important;
+        }
+        
+        .stNumberInput input:focus {
+            border-color: #85C1E9 !important;
+            background: rgba(40, 70, 90, 1) !important;
+            color: white !important;
+        }
+        
+        /* Checkbox */
+        .stCheckbox label {
+            color: #D4EAF7 !important;
+        }
+        
+        /* Info/Warning/Success/Error messages */
+        .stInfo {
+            background-color: rgba(27, 79, 114, 0.5) !important;
+            color: #AED6F1 !important;
+        }
+        
+        .stSuccess {
+            background-color: rgba(14, 102, 85, 0.5) !important;
+            color: #76D7C4 !important;
+        }
+        
+        .stWarning {
+            background-color: rgba(180, 100, 30, 0.5) !important;
+            color: #F9E79F !important;
+        }
+        
+        .stError {
+            background-color: rgba(110, 30, 30, 0.7) !important;
+            color: #FADBD8 !important;
+        }
+        
+        /* Dataframe / Table */
+        .dataframe {
+            background: #1a2a3a !important;
+            color: #E8F4FD !important;
+        }
+        
+        .dataframe th {
+            background: linear-gradient(135deg, #1B4F72 0%, #2471A3 100%) !important;
+            color: white !important;
+        }
+        
+        .dataframe td {
+            border-bottom: 1px solid #2471A3 !important;
+            color: #E8F4FD !important;
+        }
+        
+        /* Footer */
+        .footer-link {
+            background: linear-gradient(135deg, rgba(27, 79, 114, 0.4) 0%, rgba(36, 113, 163, 0.4) 100%) !important;
+        }
+        
+        .footer-link a {
+            color: #85C1E9 !important;
+        }
+        
+        hr {
+            border-color: #2471A3 !important;
+        }
+        
+        /* Sidebar */
+        [data-testid="stSidebar"] {
+            background: linear-gradient(180deg, #0D2B40 0%, #1A3A4D 50%, #1B4F72 100%) !important;
+        }
+        
+        [data-testid="stSidebar"] * {
+            color: #E8F4FD !important;
+        }
+        
+        [data-testid="stSidebar"] .stMarkdown p {
+            color: #E8F4FD !important;
+        }
+        
+        /* Headers */
+        h3 {
+            color: #85C1E9 !important;
+            border-bottom: 1px solid #5DADE2 !important;
+        }
+        
+        /* General text */
+        .stMarkdown p {
+            color: inherit !important;
+        }
+        
+        /* Selectbox */
+        .stSelectbox select {
+            background: rgba(40, 70, 90, 0.95) !important;
+            border: 2px solid #5DADE2 !important;
+            color: #FFFFFF !important;
+        }
+        
+        /* Date input */
+        .stDateInput input {
+            background: rgba(40, 70, 90, 0.95) !important;
+            border: 2px solid #5DADE2 !important;
+            color: #FFFFFF !important;
+        }
+        
+        /* File uploader */
+        .stFileUploader {
+            background: rgba(40, 70, 90, 0.5) !important;
+            border: 1px dashed #5DADE2 !important;
+            border-radius: 10px !important;
+            color: #D4EAF7 !important;
+        }
+        
+        /* Divider */
+        hr {
+            margin: 1rem 0;
+            border-color: #2471A3;
+        }
+    }
+    
+    /* Light mode styles */
     h1 {
         font-family: 'Nunito', sans-serif !important;
         font-style: italic !important;
@@ -31,6 +298,14 @@ st.markdown("""
         margin-bottom: 0.5rem !important;
         text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
         text-align: center;
+    }
+    
+    @media (prefers-color-scheme: dark) {
+        h1 {
+            background: linear-gradient(135deg, #5DADE2 0%, #85C1E9 50%, #AED6F1 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
     }
     
     h3 {
@@ -110,6 +385,7 @@ st.markdown("""
         border-color: #85C1E9;
     }
     
+    /* Light mode input styling */
     .stTextInput input {
         border-radius: 30px !important;
         border: 2px solid #85C1E9 !important;
@@ -118,6 +394,7 @@ st.markdown("""
         font-size: 16px !important;
         transition: all 0.3s;
         background: rgba(255,255,255,0.9) !important;
+        color: #1B4F72 !important;
     }
     
     .stTextInput input:focus {
@@ -179,7 +456,6 @@ st.markdown("""
         padding-bottom: 5px;
     }
     
-    /* Welcome text styling - smaller line spacing */
     .welcome-text {
         font-size: 14px;
         color: #2980B9;
@@ -245,7 +521,7 @@ st.markdown("""
         border-color: #85C1E9;
     }
     
-    /* Responsive adjustments for different screen sizes */
+    /* Responsive adjustments */
     @media (max-width: 768px) {
         .badge-container {
             margin-top: -0.5rem;
