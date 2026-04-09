@@ -10,7 +10,7 @@ from PIL import Image
 # Page Setup
 st.set_page_config(page_title="Collection Tracker", page_icon="🌊", layout="wide")
 
-# Custom CSS for Ocean Pastel Theme with Dark Mode Support
+# Custom CSS for Ocean Pastel Theme with Dark Mode Support - ALL TEXT VISIBLE
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,700;1,700&display=swap');
@@ -20,7 +20,7 @@ st.markdown("""
         background: linear-gradient(135deg, #E8F4FD 0%, #D4EAF7 50%, #C5E3F5 100%);
     }
     
-    /* Dark mode detection */
+    /* Dark mode detection - ENHANCED FOR MAXIMUM VISIBILITY */
     @media (prefers-color-scheme: dark) {
         .main {
             background: linear-gradient(135deg, #0D2B40 0%, #123e5a 50%, #1a4a6e 100%);
@@ -60,10 +60,10 @@ st.markdown("""
             color: #AED6F1 !important;
         }
         
-        /* Payment form container - fix text visibility */
+        /* Payment form container */
         .payment-form-container {
-            background: rgba(20, 50, 70, 0.7) !important;
-            border: 1px solid rgba(93, 173, 226, 0.3) !important;
+            background: rgba(20, 50, 70, 0.85) !important;
+            border: 1px solid rgba(93, 173, 226, 0.4) !important;
         }
         
         .payment-form-container label, 
@@ -74,20 +74,20 @@ st.markdown("""
         
         /* Badges */
         .info-badge {
-            background: rgba(27, 79, 114, 0.6) !important;
-            color: #AED6F1 !important;
+            background: rgba(27, 79, 114, 0.8) !important;
+            color: #D4EAF7 !important;
         }
         
         .selected-method-badge {
-            background: rgba(26, 188, 156, 0.2) !important;
-            border: 1px solid rgba(26, 188, 156, 0.3) !important;
+            background: rgba(26, 188, 156, 0.25) !important;
+            border: 1px solid rgba(26, 188, 156, 0.4) !important;
             color: #76D7C4 !important;
         }
         
-        /* Welcome box - fix text visibility */
+        /* Welcome box */
         .welcome-box {
-            background: linear-gradient(135deg, rgba(13, 43, 64, 0.85) 0%, rgba(20, 60, 80, 0.85) 100%) !important;
-            border: 2px solid rgba(93, 173, 226, 0.4) !important;
+            background: linear-gradient(135deg, rgba(13, 43, 64, 0.92) 0%, rgba(20, 60, 80, 0.92) 100%) !important;
+            border: 2px solid rgba(93, 173, 226, 0.5) !important;
         }
         
         .welcome-title {
@@ -100,7 +100,7 @@ st.markdown("""
         
         /* Error box */
         .error-box-notfound {
-            background: linear-gradient(135deg, rgba(88, 24, 24, 0.9) 0%, rgba(110, 30, 30, 0.9) 100%) !important;
+            background: linear-gradient(135deg, rgba(88, 24, 24, 0.95) 0%, rgba(110, 30, 30, 0.95) 100%) !important;
             border-left: 4px solid #E74C3C !important;
             color: #FADBD8 !important;
         }
@@ -111,95 +111,116 @@ st.markdown("""
             color: white !important;
         }
         
-        /* ========== FIX: Input fields - TEXT AND PLACEHOLDER VISIBLE ========== */
+        /* ========== CRITICAL FIX: Input fields - FULLY VISIBLE IN DARK MODE ========== */
         /* Text input - regular */
         .stTextInput input {
-            background: rgba(40, 70, 90, 0.95) !important;
+            background: rgba(255, 255, 255, 0.92) !important;
             border: 2px solid #5DADE2 !important;
-            color: #FFFFFF !important;
+            color: #1B4F72 !important;
             caret-color: #5DADE2 !important;
+            font-weight: 500 !important;
         }
         
         .stTextInput input::placeholder {
-            color: #AED6F1 !important;
-            opacity: 1 !important;
+            color: #2471A3 !important;
+            opacity: 0.85 !important;
+            font-weight: 400 !important;
         }
         
         .stTextInput input:focus {
             border-color: #85C1E9 !important;
-            background: rgba(40, 70, 90, 1) !important;
-            color: white !important;
-            box-shadow: 0 0 0 2px rgba(93, 173, 226, 0.2) !important;
+            background: white !important;
+            color: #0D2B40 !important;
+            box-shadow: 0 0 0 2px rgba(93, 173, 226, 0.3) !important;
         }
         
         /* Text input - disabled */
         .stTextInput input:disabled {
-            background: rgba(20, 45, 60, 0.8) !important;
-            color: #AED6F1 !important;
-            border-color: #2471A3 !important;
+            background: rgba(200, 220, 235, 0.9) !important;
+            color: #1B4F72 !important;
+            border-color: #5DADE2 !important;
         }
         
         /* Text area */
         .stTextArea textarea {
-            background: rgba(40, 70, 90, 0.95) !important;
+            background: rgba(255, 255, 255, 0.92) !important;
             border: 2px solid #5DADE2 !important;
-            color: #FFFFFF !important;
+            color: #1B4F72 !important;
             caret-color: #5DADE2 !important;
+            font-weight: 500 !important;
         }
         
         .stTextArea textarea::placeholder {
-            color: #AED6F1 !important;
-            opacity: 1 !important;
+            color: #2471A3 !important;
+            opacity: 0.85 !important;
         }
         
         .stTextArea textarea:focus {
             border-color: #85C1E9 !important;
-            background: rgba(40, 70, 90, 1) !important;
-            color: white !important;
-            box-shadow: 0 0 0 2px rgba(93, 173, 226, 0.2) !important;
+            background: white !important;
+            color: #0D2B40 !important;
+            box-shadow: 0 0 0 2px rgba(93, 173, 226, 0.3) !important;
         }
         
         /* Number input */
         .stNumberInput input {
-            background: rgba(40, 70, 90, 0.95) !important;
+            background: rgba(255, 255, 255, 0.92) !important;
             border: 2px solid #5DADE2 !important;
-            color: #FFFFFF !important;
+            color: #1B4F72 !important;
+            font-weight: 500 !important;
         }
         
         .stNumberInput input::placeholder {
-            color: #AED6F1 !important;
-            opacity: 1 !important;
+            color: #2471A3 !important;
+            opacity: 0.85 !important;
         }
         
         .stNumberInput input:focus {
             border-color: #85C1E9 !important;
-            background: rgba(40, 70, 90, 1) !important;
-            color: white !important;
+            background: white !important;
+            color: #0D2B40 !important;
         }
         
-        /* Checkbox */
+        /* Checkbox - make label visible */
         .stCheckbox label {
+            color: #D4EAF7 !important;
+            font-weight: 500 !important;
+        }
+        
+        /* Info/Warning/Success/Error messages - text fully visible */
+        .stInfo {
+            background-color: rgba(27, 79, 114, 0.7) !important;
             color: #E8F4FD !important;
         }
         
-        /* Info/Warning/Success/Error messages */
-        .stInfo {
-            background-color: rgba(27, 79, 114, 0.5) !important;
+        .stInfo p, .stInfo strong {
             color: #E8F4FD !important;
         }
         
         .stSuccess {
-            background-color: rgba(14, 102, 85, 0.5) !important;
-            color: #76D7C4 !important;
+            background-color: rgba(14, 102, 85, 0.7) !important;
+            color: #D4EAF7 !important;
+        }
+        
+        .stSuccess p, .stSuccess strong {
+            color: #D4EAF7 !important;
         }
         
         .stWarning {
-            background-color: rgba(180, 100, 30, 0.5) !important;
+            background-color: rgba(180, 100, 30, 0.7) !important;
+            color: #F9E79F !important;
+        }
+        
+        .stWarning p, .stWarning strong {
             color: #F9E79F !important;
         }
         
         .stError {
-            background-color: rgba(110, 30, 30, 0.7) !important;
+            background-color: rgba(110, 30, 30, 0.85) !important;
+            color: #FADBD8 !important;
+        }
+        
+        .stError p, .stError strong {
             color: #FADBD8 !important;
         }
         
@@ -258,21 +279,21 @@ st.markdown("""
         
         /* Selectbox */
         .stSelectbox select {
-            background: rgba(40, 70, 90, 0.95) !important;
+            background: rgba(255, 255, 255, 0.92) !important;
             border: 2px solid #5DADE2 !important;
-            color: #FFFFFF !important;
+            color: #1B4F72 !important;
         }
         
         /* Date input */
         .stDateInput input {
-            background: rgba(40, 70, 90, 0.95) !important;
+            background: rgba(255, 255, 255, 0.92) !important;
             border: 2px solid #5DADE2 !important;
-            color: #FFFFFF !important;
+            color: #1B4F72 !important;
         }
         
         /* File uploader */
         .stFileUploader {
-            background: rgba(40, 70, 90, 0.5) !important;
+            background: rgba(40, 70, 90, 0.6) !important;
             border: 1px dashed #5DADE2 !important;
             border-radius: 10px !important;
             color: #D4EAF7 !important;
@@ -282,6 +303,27 @@ st.markdown("""
         hr {
             margin: 1rem 0;
             border-color: #2471A3;
+        }
+        
+        /* Fix for any remaining dark text in dark mode */
+        div, span, p, label, .stMarkdown {
+            color: inherit;
+        }
+        
+        /* Make sure form labels are bright */
+        .stTextInput label, .stTextArea label, .stNumberInput label {
+            color: #AED6F1 !important;
+            font-weight: 600 !important;
+        }
+        
+        /* QR code section in dark mode */
+        .qr-section {
+            background: rgba(255, 255, 255, 0.15) !important;
+            color: #E8F4FD !important;
+        }
+        
+        .qr-section p, .qr-section strong {
+            color: #E8F4FD !important;
         }
     }
     
@@ -393,7 +435,7 @@ st.markdown("""
         font-family: 'Outfit', sans-serif !important;
         font-size: 16px !important;
         transition: all 0.3s;
-        background: rgba(255,255,255,0.9) !important;
+        background: rgba(255,255,255,0.95) !important;
         color: #1B4F72 !important;
     }
     
@@ -918,13 +960,13 @@ if user_input and not st.session_state.submitted:
                                 qr_base64 = base64.b64encode(image_file.read()).decode()
                             
                             st.markdown(f"""
-                                <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 1rem; border-radius: 15px; text-align: center; margin-bottom: 1rem;">
-                                    <p><strong>💰 PayNow/Paylah to: 80131019</strong></p>
-                                    <p>or scan QR code:</p>
+                                <div class="qr-section" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 1rem; border-radius: 15px; text-align: center; margin-bottom: 1rem;">
+                                    <p style="color: #1B4F72;"><strong>💰 PayNow/Paylah to: 80131019</strong></p>
+                                    <p style="color: #1B4F72;">or scan QR code:</p>
                                     <div style="display: flex; justify-content: center; margin-top:-15px">
                                         <img src="data:image/png;base64,{qr_base64}" width="150" style="border-radius: 10px;">
                                     </div>
-                                    <p style="font-size: 12px; margin-top: 5px;">After payment, upload screenshot below</p>
+                                    <p style="font-size: 12px; margin-top: 5px; color: #1B4F72;">After payment, upload screenshot below</p>
                                 </div>
                             """, unsafe_allow_html=True)
                         except:
@@ -945,7 +987,7 @@ if user_input and not st.session_state.submitted:
                             if st.session_state.collection_method in ["Tracked Envelope", "Tracked Box"]:
                                 address = st.text_area("Full Delivery Address *", placeholder="Enter complete address with postal code", height=80)
                             else:
-                                address = st.text_area("Address (For Mailing)", placeholder="Don't need to input if opted for self-collect/mailing", height=80)
+                                address = st.text_area("Address (For Mailing)", placeholder="Don't need to input if opted for self-collect/meet-up", height=80)
                             
                             # Items to collect - ONLY ready for collection items
                             ready_items_list = "\n".join([f"- {row['Item_Name']} (Qty: {row['Qty']})" for _, row in ready_orders.iterrows()])
