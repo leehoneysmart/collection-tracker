@@ -634,7 +634,7 @@ if user_input and not st.session_state.submitted:
                         """, unsafe_allow_html=True)
                         
                         with st.form(key="collection_form"):
-                            st.markdown('<div class="payment-form-container">', unsafe_allow_html=True)
+
                             
                             # Pre-filled fields
                             st.text_input("Telegram Username", value=user_input, disabled=True)
