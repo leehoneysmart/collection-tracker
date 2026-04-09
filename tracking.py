@@ -20,6 +20,48 @@ st.markdown("""
         background: linear-gradient(135deg, #E8F4FD 0%, #D4EAF7 50%, #C5E3F5 100%);
     }
     
+    /* Welcome box - LIGHT MODE (default) */
+    .welcome-box {
+        background: linear-gradient(135deg, rgba(69, 179, 225, 0.1) 0%, rgba(133, 193, 233, 0.2) 100%);
+        padding: 1.5rem;
+        border-radius: 20px;
+        text-align: center;
+        margin-top: 2rem;
+        border: 2px solid rgba(69, 179, 225, 0.3);
+    }
+    
+    .welcome-title {
+        font-family: 'Nunito', sans-serif;
+        font-weight: 700;
+        font-size: 20px;
+        color: #1B4F72;
+        text-align: center;
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+        display: inline-block;
+        padding-bottom: 5px;
+    }
+    
+    .welcome-text {
+        font-size: 14px;
+        color: #2980B9;
+        margin: 0.8rem 0;
+        line-height: 1.5;
+    }
+    
+    .welcome-text-small {
+        font-size: 14px;
+        color: #2980B9;
+        margin: 0.8rem 0;
+        line-height: 1.5;
+    }
+    
+    .welcome-hr {
+        margin: 1rem 0;
+        border-color: #85C1E9;
+        opacity: 0.6;
+    }
+    
     /* Dark mode detection - ENHANCED FOR MAXIMUM VISIBILITY */
     @media (prefers-color-scheme: dark) {
         .main {
@@ -28,6 +70,37 @@ st.markdown("""
         
         .block-container {
             background: rgba(13, 43, 64, 0.6) !important;
+        }
+        
+        /* Welcome box - DARK MODE OVERRIDES */
+        .welcome-box {
+            background: rgba(8, 28, 40, 0.95) !important;
+            backdrop-filter: blur(2px) !important;
+            border: 2px solid rgba(93, 173, 226, 0.6) !important;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25) !important;
+        }
+        
+        .welcome-title {
+            color: #AED6F1 !important;
+            font-size: 22px !important;
+            font-weight: 800 !important;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !important;
+        }
+        
+        .welcome-text {
+            color: #E8F4FD !important;
+            font-weight: 500 !important;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1) !important;
+        }
+        
+        .welcome-text-small {
+            color: #D6EAF8 !important;
+            font-weight: 400 !important;
+        }
+        
+        .welcome-hr {
+            border-color: #5DADE2 !important;
+            opacity: 0.5;
         }
         
         /* Metric cards */
@@ -82,38 +155,6 @@ st.markdown("""
             background: rgba(26, 188, 156, 0.25) !important;
             border: 1px solid rgba(26, 188, 156, 0.4) !important;
             color: #76D7C4 !important;
-        }
-        
-        /* Welcome box - ALTERNATIVE with better contrast */
-        .welcome-box {
-            background: rgba(8, 28, 40, 0.95) !important;
-            backdrop-filter: blur(2px) !important;
-            border: 2px solid rgba(93, 173, 226, 0.6) !important;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25) !important;
-        }
-        
-        .welcome-title {
-            color: #AED6F1 !important;
-            font-size: 22px !important;
-            font-weight: 800 !important;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !important;
-        }
-        
-        .welcome-text {
-            font-size: 14px;
-            color: #E8F4FD !important;
-            margin: 0.8rem 0;
-            line-height: 1.5;
-            font-weight: 500 !important;
-            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1) !important;
-        }
-        
-        .welcome-text-small {
-            font-size: 14px;
-            color: #D6EAF8 !important;
-            margin: 0.8rem 0;
-            line-height: 1.5;
-            font-weight: 400 !important;
         }
         
         /* Error box */
@@ -493,64 +534,6 @@ st.markdown("""
         background: rgba(255,255,255,0.4);
         border-radius: 25px;
         margin: 1.5rem;
-    }
-    
-    /* Light mode welcome box styles - only apply in light mode */
-    @media (prefers-color-scheme: light) {
-        .welcome-box {
-            background: linear-gradient(135deg, rgba(69, 179, 225, 0.1) 0%, rgba(133, 193, 233, 0.2) 100%);
-            padding: 1.5rem;
-            border-radius: 20px;
-            text-align: center;
-            margin-top: 2rem;
-            border: 2px solid rgba(69, 179, 225, 0.3);
-        }
-        
-        .welcome-title {
-            font-family: 'Nunito', sans-serif;
-            font-weight: 700;
-            font-size: 20px;
-            color: #1B4F72;
-            text-align: center;
-            margin-top: 0;
-            margin-bottom: 0.5rem;
-            display: inline-block;
-            padding-bottom: 5px;
-        }
-        
-        .welcome-text {
-            font-size: 14px;
-            color: #2980B9;
-            margin: 0.8rem 0;
-            line-height: 1.5;
-        }
-        
-        .welcome-text-small {
-            font-size: 14px;
-            color: #2980B9;
-            margin: 0.8rem 0;
-            line-height: 1.5;
-        }
-
-        /* Welcome box horizontal rule */
-        .welcome-hr {
-            margin: 1rem 0;
-            border-color: #85C1E9;
-        }
-        
-        @media (prefers-color-scheme: light) {
-            .welcome-hr {
-                border-color: #85C1E9;
-                opacity: 0.6;
-            }
-        }
-        
-        @media (prefers-color-scheme: dark) {
-            .welcome-hr {
-                border-color: #5DADE2;
-                opacity: 0.5;
-            }
-        }
     }
     
     .error-box-notfound {
