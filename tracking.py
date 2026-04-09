@@ -38,7 +38,7 @@ st.markdown("""
         font-weight: 700 !important;
         font-size: 20px !important;
         color: #1B4F72 !important;
-        text-align: center;z
+        text-align: center;
         margin-top: 0rem !important;
         margin-bottom: 0.5rem !important;
         border-bottom: 1px solid #85C1E9;
@@ -177,6 +177,21 @@ st.markdown("""
         margin-bottom: 0.5rem;
         display: inline-block;
         padding-bottom: 5px;
+    }
+    
+    /* Welcome text styling - smaller line spacing */
+    .welcome-text {
+        font-size: 14px;
+        color: #2980B9;
+        margin: 0.25rem 0;
+        line-height: 1.3;
+    }
+    
+    .welcome-text-small {
+        font-size: 14px;
+        color: #2980B9;
+        margin: 0.2rem 0;
+        line-height: 1.2;
     }
     
     .error-box-notfound {
@@ -748,13 +763,13 @@ else:
         <div class="welcome-box">
             <div style="font-size: 40px;">🐠 🌊 🐙</div>
             <div class="welcome-title">welcome to leehoney's mart.°•</div>
-            <p>check your order status and submit collection requests here!</p>
-            <hr>
-            <p>𓇼 website works best with light mode! click on the 3 dots on the top right to adjust! </p>
-            <p>𓇼 please read details on the side bar first before filling up the form!</p>
-            <p>𓇼 please collect your items within 3 weeks of notification! </p>
-            <p>𓇼 consolidation limited to maximum 2 batches! </p>
-            <p>𓇼 late fee of $1/day applies after 3 weeks!</p>
+            <p class="welcome-text">check your order status and submit collection requests here!</p>
+            <hr style="margin: 0.5rem 0;">
+            <p class="welcome-text-small">𓇼 website works best with light mode! click on the 3 dots on the top right to adjust!</p>
+            <p class="welcome-text-small">𓇼 please read details on the side bar first before filling up the form!</p>
+            <p class="welcome-text-small">𓇼 please collect your items within 3 weeks of notification!</p>
+            <p class="welcome-text-small">𓇼 consolidation limited to maximum 2 consecutive batches!</p>
+            <p class="welcome-text-small">𓇼 late fee of $1/day applies after 3 weeks!</p>
         </div>
     """, unsafe_allow_html=True)
 
@@ -777,7 +792,7 @@ with st.sidebar:
     st.markdown("🏠 For Bishan, please fill in the form 1 week before coming down to collect!")
     st.markdown("📍 For NUS, please fill in the form 3 days before coming down to collect!")
     st.markdown("---")
-    st.markdown("**Aboute Late Fee(s):**")
+    st.markdown("**About Late Fee(s):**")
     st.markdown("⏰ Late fee of $1/day applies for late collection")
     st.markdown("📩 For mailing, item(s) is/are considered collected once form is filled up!")
     st.markdown("🏠 For self-collection, item(s) is/are to be  collected within **3 weeks** from collection notification, after which late fee will also apply!!")
