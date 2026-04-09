@@ -241,7 +241,7 @@ st.markdown("""
     }
     
     hr {
-        margin: 0.5rem 0;
+        margin: 1rem 0;
         border-color: #85C1E9;
     }
     
