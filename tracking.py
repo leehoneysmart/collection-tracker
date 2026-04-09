@@ -27,7 +27,7 @@ st.markdown("""
         border-radius: 20px;
         text-align: center;
         margin-top: 2rem;
-        border: 2px solid #1B4F72;
+        border: 2px solid #F0F7FD;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
     
@@ -61,7 +61,7 @@ st.markdown("""
         margin: 1rem 0;
         border: none;
         height: 2px;
-        background-color: #85C1E9;
+        background-color: #F0F7FD;
         opacity: 0.7;
         border-radius: 2px;
     }
