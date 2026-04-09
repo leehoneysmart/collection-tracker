@@ -101,8 +101,19 @@ st.markdown("""
         }
         
         .welcome-hr {
-            border-color: #AED6F1;
-            opacity: 0.5;
+            margin: 1rem 0;
+            border: none;
+            height: 2px;
+            background-color: #85C1E9;
+            opacity: 0.7;
+            border-radius: 2px;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            .welcome-hr {
+                background-color: #AED6F1;
+                opacity: 0.9;
+            }
         }
         
         /* Metric cards */
