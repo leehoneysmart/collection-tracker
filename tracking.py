@@ -531,6 +531,26 @@ st.markdown("""
             margin: 0.8rem 0;
             line-height: 1.5;
         }
+
+        /* Welcome box horizontal rule */
+        .welcome-hr {
+            margin: 1rem 0;
+            border-color: #85C1E9;
+        }
+        
+        @media (prefers-color-scheme: light) {
+            .welcome-hr {
+                border-color: #85C1E9;
+                opacity: 0.6;
+            }
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            .welcome-hr {
+                border-color: #5DADE2;
+                opacity: 0.5;
+            }
+        }
     }
     
     .error-box-notfound {
@@ -1099,16 +1119,16 @@ elif st.session_state.submitted:
 
 else:
     st.markdown("""
-        <div class="welcome-box" style="background: rgba(8, 28, 40, 0.95); backdrop-filter: blur(2px); border: 2px solid rgba(93, 173, 226, 0.6); border-radius: 20px; padding: 1.5rem; text-align: center; margin-top: 2rem; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);">
-            <div style="font-size: 40px; filter: brightness(1.1);">🐠 🌊 🐙</div>
-            <div style="font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 22px; color: #AED6F1; text-align: center; margin-top: 0; margin-bottom: 0.5rem; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);">welcome to leehoney's mart.°•</div>
-            <p style="font-size: 14px; color: #E8F4FD; margin: 0.8rem 0; line-height: 1.5; font-weight: 500; text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);">check your order status and submit collection requests here!</p>
-            <hr style="margin: 1rem 0; border-color: #5DADE2; opacity: 0.5;">
-            <p style="font-size: 14px; color: #D6EAF8; margin: 0.8rem 0; line-height: 1.5; font-weight: 400;">𓇼 website works best with light mode! click on the 3 dots on the top right to adjust!</p>
-            <p style="font-size: 14px; color: #D6EAF8; margin: 0.8rem 0; line-height: 1.5; font-weight: 400;">𓇼 please read details on the side bar first before filling up the form!</p>
-            <p style="font-size: 14px; color: #D6EAF8; margin: 0.8rem 0; line-height: 1.5; font-weight: 400;">𓇼 please collect your items within 3 weeks of notification!</p>
-            <p style="font-size: 14px; color: #D6EAF8; margin: 0.8rem 0; line-height: 1.5; font-weight: 400;">𓇼 consolidation limited to maximum 2 consecutive batches!</p>
-            <p style="font-size: 14px; color: #D6EAF8; margin: 0.8rem 0; line-height: 1.5; font-weight: 400;">𓇼 late fee of $1/day applies after 3 weeks!</p>
+        <div class="welcome-box">
+            <div style="font-size: 40px;">🐠 🌊 🐙</div>
+            <div class="welcome-title">welcome to leehoney's mart.°•</div>
+            <p class="welcome-text">check your order status and submit collection requests here!</p>
+            <hr class="welcome-hr">
+            <p class="welcome-text-small">𓇼 website works best with light mode! click on the 3 dots on the top right to adjust!</p>
+            <p class="welcome-text-small">𓇼 please read details on the side bar first before filling up the form!</p>
+            <p class="welcome-text-small">𓇼 please collect your items within 3 weeks of notification!</p>
+            <p class="welcome-text-small">𓇼 consolidation limited to maximum 2 consecutive batches!</p>
+            <p class="welcome-text-small">𓇼 late fee of $1/day applies after 3 weeks!</p>
         </div>
     """, unsafe_allow_html=True)
 
