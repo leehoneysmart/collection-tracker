@@ -20,14 +20,15 @@ st.markdown("""
         background: linear-gradient(135deg, #E8F4FD 0%, #D4EAF7 50%, #C5E3F5 100%);
     }
     
-    /* Welcome box - LIGHT MODE (default) */
+    /* Welcome box - SIMPLE OPAQUE SOFT BLUE - works on both modes */
     .welcome-box {
-        background: linear-gradient(135deg, rgba(69, 179, 225, 0.1) 0%, rgba(133, 193, 233, 0.2) 100%);
+        background: #B8D9F5;
         padding: 1.5rem;
         border-radius: 20px;
         text-align: center;
         margin-top: 2rem;
-        border: 2px solid rgba(69, 179, 225, 0.3);
+        border: 2px solid #85C1E9;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
     
     .welcome-title {
@@ -44,14 +45,14 @@ st.markdown("""
     
     .welcome-text {
         font-size: 14px;
-        color: #2980B9;
+        color: #1B4F72;
         margin: 0.8rem 0;
         line-height: 1.5;
     }
     
     .welcome-text-small {
         font-size: 14px;
-        color: #2980B9;
+        color: #1B4F72;
         margin: 0.8rem 0;
         line-height: 1.5;
     }
@@ -62,7 +63,7 @@ st.markdown("""
         opacity: 0.6;
     }
     
-    /* Dark mode detection - ENHANCED FOR MAXIMUM VISIBILITY */
+    /* Dark mode detection */
     @media (prefers-color-scheme: dark) {
         .main {
             background: linear-gradient(135deg, #0D2B40 0%, #123e5a 50%, #1a4a6e 100%);
@@ -72,34 +73,27 @@ st.markdown("""
             background: rgba(13, 43, 64, 0.6) !important;
         }
         
-        /* Welcome box - DARK MODE OVERRIDES */
+        /* Welcome box stays the same opaque soft blue - still readable */
         .welcome-box {
-            background: rgba(8, 28, 40, 0.95) !important;
-            backdrop-filter: blur(2px) !important;
-            border: 2px solid rgba(93, 173, 226, 0.6) !important;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25) !important;
+            background: #6CA6CD;
+            border: 2px solid #5DADE2;
         }
         
         .welcome-title {
-            color: #AED6F1 !important;
-            font-size: 22px !important;
-            font-weight: 800 !important;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !important;
+            color: #FFFFFF;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
         }
         
         .welcome-text {
-            color: #E8F4FD !important;
-            font-weight: 500 !important;
-            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1) !important;
+            color: #FFFFFF;
         }
         
         .welcome-text-small {
-            color: #D6EAF8 !important;
-            font-weight: 400 !important;
+            color: #FFFFFF;
         }
         
         .welcome-hr {
-            border-color: #5DADE2 !important;
+            border-color: #AED6F1;
             opacity: 0.5;
         }
         
