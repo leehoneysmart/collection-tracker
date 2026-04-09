@@ -60,7 +60,7 @@ st.markdown("""
             color: #AED6F1 !important;
         }
         
-        /* Form container */
+        /* Payment form container - fix text visibility */
         .payment-form-container {
             background: rgba(20, 50, 70, 0.7) !important;
             border: 1px solid rgba(93, 173, 226, 0.3) !important;
@@ -69,7 +69,7 @@ st.markdown("""
         .payment-form-container label, 
         .payment-form-container .stMarkdown,
         .payment-form-container .stTextInput label {
-            color: #D4EAF7 !important;
+            color: #E8F4FD !important;
         }
         
         /* Badges */
@@ -84,18 +84,18 @@ st.markdown("""
             color: #76D7C4 !important;
         }
         
-        /* Welcome box */
+        /* Welcome box - fix text visibility */
         .welcome-box {
             background: linear-gradient(135deg, rgba(13, 43, 64, 0.85) 0%, rgba(20, 60, 80, 0.85) 100%) !important;
             border: 2px solid rgba(93, 173, 226, 0.4) !important;
         }
         
         .welcome-title {
-            color: #85C1E9 !important;
+            color: #AED6F1 !important;
         }
         
         .welcome-text, .welcome-text-small {
-            color: #D4EAF7 !important;
+            color: #E8F4FD !important;
         }
         
         /* Error box */
@@ -111,7 +111,7 @@ st.markdown("""
             color: white !important;
         }
         
-        /* ========== FIX: Input fields - TEXT VISIBLE IN DARK MODE ========== */
+        /* ========== FIX: Input fields - TEXT AND PLACEHOLDER VISIBLE ========== */
         /* Text input - regular */
         .stTextInput input {
             background: rgba(40, 70, 90, 0.95) !important;
@@ -122,7 +122,7 @@ st.markdown("""
         
         .stTextInput input::placeholder {
             color: #AED6F1 !important;
-            opacity: 0.7 !important;
+            opacity: 1 !important;
         }
         
         .stTextInput input:focus {
@@ -149,7 +149,7 @@ st.markdown("""
         
         .stTextArea textarea::placeholder {
             color: #AED6F1 !important;
-            opacity: 0.7 !important;
+            opacity: 1 !important;
         }
         
         .stTextArea textarea:focus {
@@ -168,7 +168,7 @@ st.markdown("""
         
         .stNumberInput input::placeholder {
             color: #AED6F1 !important;
-            opacity: 0.7 !important;
+            opacity: 1 !important;
         }
         
         .stNumberInput input:focus {
@@ -179,13 +179,13 @@ st.markdown("""
         
         /* Checkbox */
         .stCheckbox label {
-            color: #D4EAF7 !important;
+            color: #E8F4FD !important;
         }
         
         /* Info/Warning/Success/Error messages */
         .stInfo {
             background-color: rgba(27, 79, 114, 0.5) !important;
-            color: #AED6F1 !important;
+            color: #E8F4FD !important;
         }
         
         .stSuccess {
