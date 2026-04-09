@@ -27,7 +27,7 @@ st.markdown("""
         border-radius: 20px;
         text-align: center;
         margin-top: 2rem;
-        border: 2px solid #F0F7FD;
+        border: 2px solid #85C1E9;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
     
@@ -61,8 +61,8 @@ st.markdown("""
         margin: 1rem 0;
         border: none;
         height: 2px;
-        background-color: #F0F7FD;
-        opacity: 0.7;
+        background-color: #5DADE2;
+        opacity: 0.8;
         border-radius: 2px;
     }
     
@@ -96,8 +96,8 @@ st.markdown("""
         }
         
         .welcome-hr {
-            background-color: #AED6F1;
-            opacity: 0.9;
+            background-color: #85C1E9;
+            opacity: 1;
         }
         
         /* Metric cards */
