@@ -573,11 +573,8 @@ if user_input and not st.session_state.submitted:
                         st.markdown("#### 🤝 Select MRT Station")
                         st.markdown("""
                             <div style="background: rgba(133, 193, 233, 0.15); padding: 0.8rem; border-radius: 12px; margin-bottom: 1rem; font-size: 13px;">
-                                <strong>📍 Available MRT Stations:</strong><br>
-                                • Kent Ridge MRT<br>
-                                • Clementi MRT<br>
-                                • Buona Vista MRT<br>
-                                <em>Note: Admin may choose locations near the MRT station.</em>
+                                <strong>📍 Important Notes:</strong><br>
+                                <em>Admin may choose locations near the MRT station.</em>
                             </div>
                         """, unsafe_allow_html=True)
                         loc1, loc2, loc3 = st.columns(3)
@@ -604,7 +601,7 @@ if user_input and not st.session_state.submitted:
                     elif st.session_state.collection_method and st.session_state.specific_location:
                         st.markdown(f"""
                             <div class="selected-method-badge">
-                                ✨ Selected: {st.session_state.collection_method} - {st.session_state.specific_location} (Free)
+                                ✨ Selected: {st.session_state.collection_method} - {st.session_state.specific_location}
                             </div>
                         """, unsafe_allow_html=True)
                     elif st.session_state.collection_method and st.session_state.collection_method in ["Self-Collect", "Meet-up"] and not st.session_state.specific_location:
@@ -753,9 +750,11 @@ else:
             <div class="welcome-title">welcome to leehoney's mart.°•</div>
             <p>check your order status and submit collection requests here!</p>
             <hr>
-            <p>𓇼 please collect your items within 3 weeks of notification</p>
-            <p>𓇼 consolidation limited to maximum 2 batches</p>
-            <p>𓇼 late fee of $1/day applies after 3 weeks</p>
+            <p>𓇼 website works bet with light mode! click on the 3 dots on the top right to adjust! </p>
+            <p>𓇼 please read details on the side bar first before filling up the form!</p>
+            <p>𓇼 please collect your items within 3 weeks of notification! </p>
+            <p>𓇼 consolidation limited to maximum 2 batches! </p>
+            <p>𓇼 late fee of $1/day applies after 3 weeks!</p>
         </div>
     """, unsafe_allow_html=True)
 
