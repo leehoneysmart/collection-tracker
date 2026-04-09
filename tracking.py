@@ -190,7 +190,7 @@ st.markdown("""
     .welcome-text-small {
         font-size: 14px;
         color: #2980B9;
-        margin: 0.2rem 0;
+        margin: 0.5rem 0;
         line-height: 1.2;
     }
     
