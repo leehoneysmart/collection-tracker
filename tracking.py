@@ -633,7 +633,7 @@ if user_input and not st.session_state.submitted:
                                 <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 1rem; border-radius: 15px; text-align: center; margin-bottom: 1rem;">
                                     <p><strong>💰 PayNow/Paylah to: 80131019</strong></p>
                                     <p>or scan QR code:</p>
-                                    <div style="display: flex; justify-content: center;">
+                                    <div style="display: flex; justify-content: center; margin-top:-5px">
                                         <img src="data:image/png;base64,{qr_base64}" width="150" style="border-radius: 10px;">
                                     </div>
                                     <p style="font-size: 12px; margin-top: 5px;">After payment, upload screenshot below</p>
