@@ -10,13 +10,186 @@ from PIL import Image
 # Page Setup
 st.set_page_config(page_title="Collection Tracker", page_icon="🌊", layout="wide")
 
-# Custom CSS for Ocean Pastel Theme
+# Custom CSS for Ocean Pastel Theme with Dark Mode Support
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,700;1,700&display=swap');
     
+    /* Light mode (default) */
     .main {
         background: linear-gradient(135deg, #E8F4FD 0%, #D4EAF7 50%, #C5E3F5 100%);
+    }
+    
+    /* Dark mode detection */
+    @media (prefers-color-scheme: dark) {
+        .main {
+            background: linear-gradient(135deg, #0D2B40 0%, #123e5a 50%, #1a4a6e 100%);
+        }
+        
+        .block-container {
+            background: rgba(13, 43, 64, 0.6) !important;
+        }
+        
+        .metric-card {
+            background: rgba(20, 50, 70, 0.95) !important;
+            border: 1px solid rgba(93, 173, 226, 0.3) !important;
+        }
+        
+        .metric-card div {
+            color: #D4EAF7 !important;
+        }
+        
+        .custom-info-box {
+            background: linear-gradient(135deg, #1B4F72 0%, #2471A3 100%) !important;
+            color: #E8F4FD !important;
+        }
+        
+        .custom-success-box {
+            background: linear-gradient(135deg, #0E6655 0%, #148F77 100%) !important;
+            color: white !important;
+        }
+        
+        .grand-total-box {
+            background: linear-gradient(135deg, #0E6655 0%, #117A65 100%) !important;
+            color: white !important;
+        }
+        
+        .payment-form-container {
+            background: rgba(20, 50, 70, 0.7) !important;
+            border: 1px solid rgba(93, 173, 226, 0.3) !important;
+        }
+        
+        .payment-form-container label, 
+        .payment-form-container .stMarkdown,
+        .payment-form-container .stTextInput label {
+            color: #D4EAF7 !important;
+        }
+        
+        .info-badge {
+            background: rgba(27, 79, 114, 0.6) !important;
+            color: #AED6F1 !important;
+        }
+        
+        .selected-method-badge {
+            background: rgba(26, 188, 156, 0.2) !important;
+            border: 1px solid rgba(26, 188, 156, 0.3) !important;
+            color: #76D7C4 !important;
+        }
+        
+        .welcome-box {
+            background: linear-gradient(135deg, rgba(13, 43, 64, 0.85) 0%, rgba(20, 60, 80, 0.85) 100%) !important;
+            border: 2px solid rgba(93, 173, 226, 0.4) !important;
+        }
+        
+        .welcome-title {
+            color: #85C1E9 !important;
+        }
+        
+        .welcome-text, .welcome-text-small {
+            color: #AED6F1 !important;
+        }
+        
+        .error-box-notfound {
+            background: linear-gradient(135deg, rgba(88, 24, 24, 0.9) 0%, rgba(110, 30, 30, 0.9) 100%) !important;
+            border-left: 4px solid #E74C3C !important;
+            color: #FADBD8 !important;
+        }
+        
+        .stButton button {
+            background: linear-gradient(135deg, #2471A3 0%, #1A5276 100%) !important;
+            color: white !important;
+        }
+        
+        .stTextInput input {
+            background: rgba(30, 60, 80, 0.9) !important;
+            border: 2px solid #2471A3 !important;
+            color: #E8F4FD !important;
+        }
+        
+        .stTextInput input:focus {
+            border-color: #5DADE2 !important;
+            background: rgba(30, 60, 80, 1) !important;
+        }
+        
+        .stTextArea textarea {
+            background: rgba(30, 60, 80, 0.9) !important;
+            border: 2px solid #2471A3 !important;
+            color: #E8F4FD !important;
+        }
+        
+        .stNumberInput input {
+            background: rgba(30, 60, 80, 0.9) !important;
+            border: 2px solid #2471A3 !important;
+            color: #E8F4FD !important;
+        }
+        
+        .stCheckbox label {
+            color: #D4EAF7 !important;
+        }
+        
+        .stInfo {
+            background-color: rgba(27, 79, 114, 0.5) !important;
+            color: #AED6F1 !important;
+        }
+        
+        .stSuccess {
+            background-color: rgba(14, 102, 85, 0.5) !important;
+            color: #76D7C4 !important;
+        }
+        
+        .stWarning {
+            background-color: rgba(180, 100, 30, 0.5) !important;
+            color: #F9E79F !important;
+        }
+        
+        .stError {
+            background-color: rgba(110, 30, 30, 0.7) !important;
+            color: #FADBD8 !important;
+        }
+        
+        .dataframe {
+            background: #1a2a3a !important;
+            color: #E8F4FD !important;
+        }
+        
+        .dataframe th {
+            background: linear-gradient(135deg, #1B4F72 0%, #2471A3 100%) !important;
+            color: white !important;
+        }
+        
+        .dataframe td {
+            border-bottom: 1px solid #2471A3 !important;
+            color: #E8F4FD !important;
+        }
+        
+        .footer-link {
+            background: linear-gradient(135deg, rgba(27, 79, 114, 0.4) 0%, rgba(36, 113, 163, 0.4) 100%) !important;
+        }
+        
+        .footer-link a {
+            color: #85C1E9 !important;
+        }
+        
+        hr {
+            border-color: #2471A3 !important;
+        }
+        
+        [data-testid="stSidebar"] {
+            background: linear-gradient(180deg, #0D2B40 0%, #1A3A4D 50%, #1B4F72 100%) !important;
+        }
+        
+        [data-testid="stSidebar"] * {
+            color: #E8F4FD !important;
+        }
+        
+        h3 {
+            color: #85C1E9 !important;
+            border-bottom: 1px solid #5DADE2 !important;
+        }
+        
+        .stMarkdown p {
+            color: inherit !important;
+        }
     }
     
     h1 {
@@ -31,6 +204,14 @@ st.markdown("""
         margin-bottom: 0.5rem !important;
         text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
         text-align: center;
+    }
+    
+    @media (prefers-color-scheme: dark) {
+        h1 {
+            background: linear-gradient(135deg, #5DADE2 0%, #85C1E9 50%, #AED6F1 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
     }
     
     h3 {
@@ -179,7 +360,7 @@ st.markdown("""
         padding-bottom: 5px;
     }
     
-    /* Welcome text styling - smaller line spacing */
+    /* Welcome text styling */
     .welcome-text {
         font-size: 14px;
         color: #2980B9;
@@ -245,7 +426,7 @@ st.markdown("""
         border-color: #85C1E9;
     }
     
-    /* Responsive adjustments for different screen sizes */
+    /* Responsive adjustments */
     @media (max-width: 768px) {
         .badge-container {
             margin-top: -0.5rem;
