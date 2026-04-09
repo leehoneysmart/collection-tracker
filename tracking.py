@@ -777,7 +777,6 @@ with st.sidebar:
     st.markdown("**About Self-Collection:**")
     st.markdown("🏠 For Bishan, please fill in the form 1 week before coming down to collect!")
     st.markdown("📍 For NUS, please fill in the form 3 days before coming down to collect!")
-    st.markdown("💬 State your username in the comment when transferring!")
     st.markdown("---")
     st.markdown("**Aboute Late Fee(s):**")
     st.markdown("⏰ Late fee of $1/day applies for late collection")
