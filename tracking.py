@@ -650,7 +650,7 @@ if user_input and not st.session_state.submitted:
                                 st.text_input("Selected Location", value=st.session_state.specific_location, disabled=True)
                             
                             # Required fields
-                            name = st.text_input("Full Name *", placeholder="Enter your full name")
+                            name = st.text_input("Name *", placeholder="Enter your name")
                             phone = st.text_input("Phone Number *", placeholder="e.g., 91234567")
                             
                             # Address - required only for mailing
