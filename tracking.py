@@ -657,7 +657,7 @@ if user_input and not st.session_state.submitted:
                             if st.session_state.collection_method in ["Tracked Envelope", "Tracked Box"]:
                                 address = st.text_area("Full Delivery Address *", placeholder="Enter complete address with postal code", height=80)
                             else:
-                                address = st.text_area("Address (For Mailing)", placeholder="Please input your full address, including unit number and postal code~", height=80)
+                                address = st.text_area("Address (For Mailing)", placeholder="Don't need to input if opted for self-collect/mailing", height=80)
                             
                             # Items to collect - ONLY ready for collection items
                             ready_items_list = "\n".join([f"- {row['Item_Name']} (Qty: {row['Qty']})" for _, row in ready_orders.iterrows()])
