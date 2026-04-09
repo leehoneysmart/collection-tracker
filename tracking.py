@@ -446,7 +446,8 @@ if user_input and not st.session_state.submitted:
                         'Second_Payment': '2nd Payment',
                         'Late_Fee': 'Late Fee',
                         'Total_Due': 'Total Due',
-                        'Payment_Status': 'Payment Status'
+                        'Payment_Status': 'Payment Status',
+                        'Status':'Item Status'
                     })
                     
                     # Format currency columns
