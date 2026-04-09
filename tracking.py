@@ -38,7 +38,7 @@ st.markdown("""
         font-weight: 700 !important;
         font-size: 20px !important;
         color: #1B4F72 !important;
-        text-align: center;
+        text-align: center;z
         margin-top: 0rem !important;
         margin-bottom: 0.5rem !important;
         border-bottom: 1px solid #85C1E9;
@@ -626,14 +626,9 @@ if user_input and not st.session_state.submitted:
                             <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 1rem; border-radius: 15px; text-align: center; margin-bottom: 1rem;">
                                 <p><strong>💰 PayNow/Paylah to: 80131019</strong></p>
                                 <p>or scan QR code:</p>
-                        """, unsafe_allow_html=True)
-                        
-                        # Display QR code from local file
-                        col1, col2, col3 = st.columns([1, 2, 1])
-                        with col2:
-                            st.image("qr_code.png", width=150)
-                        
-                        st.markdown("""
+                                <div style="display: flex; justify-content: center; margin: 10px 0;">
+                                    <img src="qr_code.png" width="150" style="border-radius: 10px;">
+                                </div>
                                 <p style="font-size: 12px; margin-top: 10px;">After payment, upload screenshot below</p>
                             </div>
                         """, unsafe_allow_html=True)
