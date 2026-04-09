@@ -22,7 +22,7 @@ st.markdown("""
     
     /* Welcome box - SIMPLE OPAQUE SOFT BLUE - works on both modes */
     .welcome-box {
-        background: #B8D9F5;
+        background: #B8D9F5 ;
         padding: 1.5rem;
         border-radius: 20px;
         text-align: center;
