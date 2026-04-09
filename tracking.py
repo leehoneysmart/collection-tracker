@@ -621,7 +621,7 @@ if user_input and not st.session_state.submitted:
                         st.markdown("---")
                         st.markdown("### 📝 Complete Your Collection Request")
                         
-                        # PayNow QR Code section
+                        # PayNow QR Code section with Google Drive image
                         st.markdown("""
                             <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 1rem; border-radius: 15px; text-align: center; margin-bottom: 1rem;">
                                 <p><strong>💰 PayNow/Paylah to: 80131019</strong></p>
@@ -638,7 +638,7 @@ if user_input and not st.session_state.submitted:
                         """, unsafe_allow_html=True)
                         
                         with st.form(key="collection_form"):
-
+                            st.markdown('<div class="payment-form-container">', unsafe_allow_html=True)
                             
                             # Pre-filled fields
                             st.text_input("Telegram Username", value=user_input, disabled=True)
