@@ -75,7 +75,7 @@ st.markdown("""
         
         /* Welcome box stays the same opaque soft blue - still readable */
         .welcome-box {
-            background: #6CA6CD ;
+            background: #B8D9F5;
             border: 2px solid #5DADE2;
         }
         
