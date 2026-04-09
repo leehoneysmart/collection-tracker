@@ -622,16 +622,25 @@ if user_input and not st.session_state.submitted:
                         st.markdown("### 📝 Complete Your Collection Request")
                         
                         # PayNow QR Code section
-                        st.markdown("""
-                            <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 1rem; border-radius: 15px; text-align: center; margin-bottom: 1rem;">
-                                <p><strong>💰 PayNow/Paylah to: 80131019</strong></p>
-                                <p>or scan QR code:</p>
-                                <div style="display: flex; justify-content: center; margin: 10px 0;">
-                                    <img src="qr_code.png" width="150" style="border-radius: 10px;">
+                        import base64
+                        
+                        # Read and encode the QR code image
+                        try:
+                            with open("qr_code.png", "rb") as image_file:
+                                qr_base64 = base64.b64encode(image_file.read()).decode()
+                            
+                            st.markdown(f"""
+                                <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 1rem; border-radius: 15px; text-align: center; margin-bottom: 1rem;">
+                                    <p><strong>💰 PayNow/Paylah to: 80131019</strong></p>
+                                    <p>or scan QR code:</p>
+                                    <div style="display: flex; justify-content: center; margin: 10px 0;">
+                                        <img src="data:image/png;base64,{qr_base64}" width="150" style="border-radius: 10px;">
+                                    </div>
+                                    <p style="font-size: 12px; margin-top: 10px;">After payment, upload screenshot below</p>
                                 </div>
-                                <p style="font-size: 12px; margin-top: 10px;">After payment, upload screenshot below</p>
-                            </div>
-                        """, unsafe_allow_html=True)
+                            """, unsafe_allow_html=True)
+                        except:
+                            st.warning("QR code image not found. Please add qr_code.png to the app folder.")
                         
                         with st.form(key="collection_form"):
                             st.markdown('<div class="payment-form-container">', unsafe_allow_html=True)
