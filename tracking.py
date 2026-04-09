@@ -184,7 +184,7 @@ st.markdown("""
         font-size: 14px;
         color: #2980B9;
         margin: 0.8rem 0;
-        line-height: 1.6;
+        line-height: 2;
     }
     
     .welcome-text-small {
