@@ -183,8 +183,8 @@ st.markdown("""
     .welcome-text {
         font-size: 14px;
         color: #2980B9;
-        margin: 0.25rem 0;
-        line-height: 1.3;
+        margin: 0.5rem 0;
+        line-height: 1.4;
     }
     
     .welcome-text-small {
