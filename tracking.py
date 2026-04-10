@@ -60,7 +60,7 @@ st.markdown("""
     /* Force line visibility on all devices */
     .welcome-hr {
         background: #5DADE2 !important;
-        height: 3px !important;
+        height: 1px !important;
         border: none !important;
         opacity: 1 !important;
         display: block !important;
