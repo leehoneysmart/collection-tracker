@@ -61,7 +61,7 @@ st.markdown("""
         margin: 1rem 0;
         border: none;
         height: 3px;
-        background: linear-gradient(90deg, #1B4F72, #2980B9, #1B4F72);
+        background: #1B4F72;
         opacity: 1;
         border-radius: 2px;
     }
