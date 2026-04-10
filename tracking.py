@@ -6,6 +6,7 @@ from google.oauth2.service_account import Credentials
 import json
 import base64
 from PIL import Image
+import pytz  # Add this import for timezone handling
 
 # Page Setup
 st.set_page_config(page_title="Collection Tracker", page_icon="🌊", layout="wide")
@@ -605,6 +606,12 @@ st.markdown("""
 # Title
 st.markdown('<h1>🌊 leehoney\'s mart collection tracker!</h1>', unsafe_allow_html=True)
 
+# Function to get current time in SGT
+def get_current_sgt():
+    """Get current datetime in Singapore Time (UTC+8)"""
+    sgt_tz = pytz.timezone('Asia/Singapore')
+    return datetime.now(sgt_tz)
+
 # Function to save responses to Google Sheet
 def save_to_google_sheet(data):
     try:
@@ -648,14 +655,14 @@ def save_to_google_sheet(data):
         
         # If empty, add headers
         if not worksheet.get_all_values():
-            headers = ['Timestamp', 'Telegram Username', 'Collection Method', 'Specific Location', 
+            headers = ['Timestamp (SGT)', 'Telegram Username', 'Collection Method', 'Specific Location', 
                       'Name', 'Phone Number', 'Address', 'Items to Collect', 
                       'Amount Paid', 'Transaction Proof', 'Note', 'Status']
             worksheet.append_row(headers)
         
-        # Append data
+        # Append data with SGT timestamp
         row = [
-            data['timestamp'],
+            data['timestamp'],  # Now this is in SGT
             data['username'],
             data['collection_method'],
             data['specific_location'],
@@ -1048,11 +1055,14 @@ if user_input and not st.session_state.submitted:
                                 elif st.session_state.collection_method in ["Tracked Envelope", "Tracked Box"] and not proof_file:
                                     st.error("Please upload your transaction proof")
                                 else:
-                                    # Prepare data
+                                    # Prepare data with SGT timestamp
                                     proof_info = f"{proof_file.name} - {datetime.now()}" if proof_file else "No proof needed (self-collect/meet-up)"
                                     
+                                    # Get current SGT time
+                                    current_sgt = get_current_sgt()
+                                    
                                     response_data = {
-                                        'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                                        'timestamp': current_sgt.strftime('%Y-%m-%d %H:%M:%S SGT'),
                                         'username': user_input,
                                         'collection_method': st.session_state.collection_method,
                                         'specific_location': st.session_state.specific_location or "N/A",
