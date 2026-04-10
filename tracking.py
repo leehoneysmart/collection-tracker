@@ -1095,7 +1095,7 @@ if user_input and not st.session_state.submitted:
                         • Incorrect username (check spelling and include "@")<br>
                         • You may have changed your telegram username! Inform @ajelsssss to update new username!<br>
                         • Items not ready for collection yet<br><br>
-                        Contact <strong>@ajelsssss</strong> for assistance.
+                        Contact <strong>@ajelsssss</strong> for assistance~
                     </div>
                 """, unsafe_allow_html=True)
 
