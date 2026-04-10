@@ -95,13 +95,12 @@ st.markdown("""
             color: #FFFFFF;
         }
         
-        /* FIXED: HR line visible in dark mode - bright and visible */
+        /* FIXED: HR line visible in dark mode - matching box border */
         .welcome-hr {
-            background: #76D7C4 !important;
+            background: #5DADE2 !important;
             opacity: 1 !important;
             height: 2px !important;
             border: none !important;
-            box-shadow: 0 0 2px rgba(118, 215, 196, 0.3) !important;
         }
         
         /* Metric cards */
