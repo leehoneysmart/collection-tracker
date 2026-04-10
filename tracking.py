@@ -1,12 +1,11 @@
 import streamlit as st
 import pandas as pd
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 import gspread
 from google.oauth2.service_account import Credentials
 import json
 import base64
 from PIL import Image
-import pytz  # Add this import for timezone handling
 
 # Page Setup
 st.set_page_config(page_title="Collection Tracker", page_icon="🌊", layout="wide")
@@ -606,11 +605,13 @@ st.markdown("""
 # Title
 st.markdown('<h1>🌊 leehoney\'s mart collection tracker!</h1>', unsafe_allow_html=True)
 
-# Function to get current time in SGT
+# Function to get current time in SGT (UTC+8) - Using built-in datetime
 def get_current_sgt():
     """Get current datetime in Singapore Time (UTC+8)"""
-    sgt_tz = pytz.timezone('Asia/Singapore')
-    return datetime.now(sgt_tz)
+    # Get current UTC time and add 8 hours for SGT
+    utc_now = datetime.now(timezone.utc)
+    sgt_now = utc_now + timedelta(hours=8)
+    return sgt_now
 
 # Function to save responses to Google Sheet
 def save_to_google_sheet(data):
