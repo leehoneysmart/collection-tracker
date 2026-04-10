@@ -64,6 +64,9 @@ st.markdown("""
         background: linear-gradient(90deg, #5DADE2, #85C1E9, #AED6F1, #85C1E9, #5DADE2);
         opacity: 1;
         border-radius: 2px;
+        display: block;
+        clear: both;
+        width: 100%;
     }
     
     /* Dark mode detection */
