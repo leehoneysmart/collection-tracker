@@ -96,7 +96,7 @@ st.markdown("""
         }
         
         .welcome-hr {
-            background-color: #1B4F72;
+            background-color: #0D2B40;
             opacity: 0.8;
         }
         
