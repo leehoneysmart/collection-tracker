@@ -57,16 +57,13 @@ st.markdown("""
         line-height: 1.5;
     }
     
+    /* Force line visibility on all devices */
     .welcome-hr {
-        margin: 1rem 0;
-        border: none;
-        height: 3px;
-        background: linear-gradient(90deg, #5DADE2, #85C1E9, #AED6F1, #85C1E9, #5DADE2);
-        opacity: 1;
-        border-radius: 2px;
-        display: block;
-        clear: both;
-        width: 100%;
+        background: #5DADE2 !important;
+        height: 3px !important;
+        border: none !important;
+        opacity: 1 !important;
+        display: block !important;
     }
     
     /* Dark mode detection */
