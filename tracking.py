@@ -66,13 +66,11 @@ st.markdown("""
         border-radius: 2px;
     }
     
+    /* Dark mode detection */
     @media (prefers-color-scheme: dark) {
-        .welcome-hr {
-            background-color: #85C1E9 !important;
-            opacity: 1 !important;
-            height: 2px !important;
+        .main {
+            background: linear-gradient(135deg, #0D2B40 0%, #123e5a 50%, #1a4a6e 100%);
         }
-    }
         
         .block-container {
             background: rgba(13, 43, 64, 0.6) !important;
@@ -97,9 +95,12 @@ st.markdown("""
             color: #FFFFFF;
         }
         
+        /* FIXED: HR line visible in dark mode - navy blue with full opacity */
         .welcome-hr {
-            background-color: #0D2B40;
-            opacity: 0.8;
+            background-color: #0B3B5E !important;
+            opacity: 1 !important;
+            height: 2px !important;
+            border: none !important;
         }
         
         /* Metric cards */
