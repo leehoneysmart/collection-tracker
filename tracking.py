@@ -1042,19 +1042,15 @@ if user_input and not st.session_state.submitted:
                         # Define available time slots per MRT station
                         station_time_slots = {
                             "Kent Ridge MRT": [
-                                "Monday 5pm - 7pm",
-                                "Wednesday 5pm - 7pm",
-                                "Friday 6pm - 8pm"
+                                "13 April, 1500-1520",
+                                "17 April, 1800-1820"
                             ],
                             "Clementi MRT": [
-                                "Monday 6pm - 8pm",
-                                "Wednesday 6pm - 8pm",
-                                "Saturday 10am - 12pm"
+                                "15 April, 1500-1520",
                             ],
                             "Buona Vista MRT": [
-                                "Tuesday 6pm - 8pm",
-                                "Thursday 6pm - 8pm",
-                                "Saturday 2pm - 4pm"
+                                "20 April, 1800-1820",
+                                "23 April, 1200-1220",
                             ]
                         }
                         
