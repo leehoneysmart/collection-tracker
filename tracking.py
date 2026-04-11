@@ -1117,11 +1117,11 @@ else:
         <div class="welcome-box">
             <div style="font-size: 40px;">🐠 🌊 🐙</div>
             <div class="welcome-title">welcome to leehoney's mart.°•</div>
-            <p class="welcome-text">check your order status and submit collection requests here!</p>
-            <p class="welcome-text">once request is successfully submitted, you will see a "Thank you for your submission" page!</p>
+            <p class="welcome-text">check order status and submit collection requests here!</p>
             <hr class="welcome-hr">
             <p class="welcome-text-small">𓇼 website works best with light mode! click on the 3 dots on the top right to adjust!</p>
             <p class="welcome-text-small">𓇼 please read details on the side bar first before filling up the form!</p>
+            <p class="welcome-text-small">𓇼 once collection request is successfully submitted, you will see a "Thank you for your submission" page!</p>
             <p class="welcome-text-small">𓇼 please collect your items within 3 weeks of notification!</p>
             <p class="welcome-text-small">𓇼 consolidation limited to maximum 2 consecutive batches!</p>
             <p class="welcome-text-small">𓇼 late fee of $1/day applies after 3 weeks!</p>
