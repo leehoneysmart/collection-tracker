@@ -1035,26 +1035,44 @@ if user_input and not st.session_state.submitted:
                             st.session_state.date_valid = False
                             st.error(f"❌ Please select a date at least {required_days} days in advance (earliest: {min_date.strftime('%d %b %Y')}).")
                     
-                    # ========== NEW: Time slot picker for Meet-up ==========
+                    # ========== NEW: Time slot picker for Meet-up (station-specific) ==========
                     if st.session_state.collection_method == "Meet-up" and st.session_state.specific_location:
                         st.markdown("#### 🕒 Select Preferred Time Slot")
-                        st.markdown("""
+                        
+                        # Define available time slots per MRT station
+                        station_time_slots = {
+                            "Kent Ridge MRT": [
+                                "Monday 5pm - 7pm",
+                                "Wednesday 5pm - 7pm",
+                                "Friday 6pm - 8pm"
+                            ],
+                            "Clementi MRT": [
+                                "Monday 6pm - 8pm",
+                                "Wednesday 6pm - 8pm",
+                                "Saturday 10am - 12pm"
+                            ],
+                            "Buona Vista MRT": [
+                                "Tuesday 6pm - 8pm",
+                                "Thursday 6pm - 8pm",
+                                "Saturday 2pm - 4pm"
+                            ]
+                        }
+                        
+                        # Get slots for the selected station
+                        station = st.session_state.specific_location
+                        available_slots = station_time_slots.get(station, ["Please contact admin for available slots"])
+                        
+                        # Display station-specific note
+                        st.markdown(f"""
                             <div style="background: rgba(133, 193, 233, 0.15); padding: 0.8rem; border-radius: 12px; margin-bottom: 1rem; font-size: 13px;">
-                                <strong>Available time slots (subject to admin's confirmation):</strong><br>
-                                • Monday & Wednesday: 6pm - 8pm<br>
-                                • Friday: 5pm - 7pm<br>
-                                • Saturday: 10am - 12pm
+                                <strong>📍 Available time slots for {station}:</strong><br>
+                                {'<br>'.join(['• ' + slot for slot in available_slots])}
                             </div>
                         """, unsafe_allow_html=True)
                         
                         time_slot = st.selectbox(
                             "Select a time slot",
-                            [
-                                "Monday 6pm - 8pm",
-                                "Wednesday 6pm - 8pm",
-                                "Friday 5pm - 7pm",
-                                "Saturday 10am - 12pm"
-                            ],
+                            available_slots,
                             index=None,
                             placeholder="Choose a time slot..."
                         )
