@@ -654,11 +654,12 @@ def save_to_google_sheet(data):
         
         worksheet = sheet.get_worksheet(0)
         
-        # If empty, add headers
+        # If empty, add headers (including new columns for collection date and meetup time)
         if not worksheet.get_all_values():
             headers = ['Timestamp (SGT)', 'Telegram Username', 'Collection Method', 'Specific Location', 
                       'Name', 'Phone Number', 'Address', 'Items to Collect', 
-                      'Amount Paid', 'Transaction Proof', 'Note', 'Status']
+                      'Amount Paid', 'Transaction Proof', 'Note', 'Status', 
+                      'Collection Date', 'Meetup Time']
             worksheet.append_row(headers)
         
         # Append data with SGT timestamp
@@ -674,7 +675,9 @@ def save_to_google_sheet(data):
             data['amount_paid'],
             data['transaction_proof'],
             data['note'],
-            'Pending'
+            'Pending',
+            data.get('collection_date', ''),
+            data.get('meetup_time', '')
         ]
         worksheet.append_row(row)
         return True
@@ -735,6 +738,12 @@ if 'specific_location' not in st.session_state:
     st.session_state.specific_location = None
 if 'show_all_orders' not in st.session_state:
     st.session_state.show_all_orders = False
+if 'collection_date' not in st.session_state:
+    st.session_state.collection_date = None
+if 'meetup_time' not in st.session_state:
+    st.session_state.meetup_time = None
+if 'date_valid' not in st.session_state:
+    st.session_state.date_valid = False
 
 if user_input and not st.session_state.submitted:
     with st.spinner("🌊 Diving in..."):
@@ -867,24 +876,36 @@ if user_input and not st.session_state.submitted:
                         if st.button("📩 Tracked Envelope\n+$3.00", use_container_width=True):
                             st.session_state.collection_method = "Tracked Envelope"
                             st.session_state.specific_location = None
+                            st.session_state.collection_date = None
+                            st.session_state.meetup_time = None
+                            st.session_state.date_valid = False
                             st.rerun()
                     
                     with col_b:
                         if st.button("📦 Tracked Box\n+$3.80", use_container_width=True):
                             st.session_state.collection_method = "Tracked Box"
                             st.session_state.specific_location = None
+                            st.session_state.collection_date = None
+                            st.session_state.meetup_time = None
+                            st.session_state.date_valid = False
                             st.rerun()
                     
                     with col_c:
                         if st.button("🏠 Self-Collect\n", use_container_width=True):
                             st.session_state.collection_method = "Self-Collect"
                             st.session_state.specific_location = None
+                            st.session_state.collection_date = None
+                            st.session_state.meetup_time = None
+                            st.session_state.date_valid = False
                             st.rerun()
                     
                     with col_d:
                         if st.button("🤝 Meet-up\n", use_container_width=True):
                             st.session_state.collection_method = "Meet-up"
                             st.session_state.specific_location = None
+                            st.session_state.collection_date = None
+                            st.session_state.meetup_time = None
+                            st.session_state.date_valid = False
                             st.rerun()
                     
                     # Show Grand Total Box if a collection method is selected
@@ -928,10 +949,14 @@ if user_input and not st.session_state.submitted:
                         with loc1:
                             if st.button("🏠 NUS", use_container_width=True):
                                 st.session_state.specific_location = "NUS - 6 College Avenue East, 138614"
+                                st.session_state.collection_date = None
+                                st.session_state.date_valid = False
                                 st.rerun()
                         with loc2:
                             if st.button("🏠 Bishan", use_container_width=True):
                                 st.session_state.specific_location = "Bishan - Block 142 Bishan Street 12 #09-528, 570142"
+                                st.session_state.collection_date = None
+                                st.session_state.date_valid = False
                                 st.rerun()
                     
                     elif st.session_state.collection_method == "Meet-up":
@@ -946,14 +971,17 @@ if user_input and not st.session_state.submitted:
                         with loc1:
                             if st.button("🚉 Kent Ridge MRT", use_container_width=True):
                                 st.session_state.specific_location = "Kent Ridge MRT"
+                                st.session_state.meetup_time = None
                                 st.rerun()
                         with loc2:
                             if st.button("🚉 Clementi MRT", use_container_width=True):
                                 st.session_state.specific_location = "Clementi MRT"
+                                st.session_state.meetup_time = None
                                 st.rerun()
                         with loc3:
                             if st.button("🚉 Buona Vista MRT", use_container_width=True):
                                 st.session_state.specific_location = "Buona Vista MRT"
+                                st.session_state.meetup_time = None
                                 st.rerun()
                     
                     # Show selected method badge
@@ -972,11 +1000,78 @@ if user_input and not st.session_state.submitted:
                     elif st.session_state.collection_method and st.session_state.collection_method in ["Self-Collect", "Meet-up"] and not st.session_state.specific_location:
                         st.info("👆 Please select a specific location above to continue.")
                     
-                    # Show form if method and location selected (or method selected for mailing)
+                    # ========== NEW: Date picker for Self-Collect ==========
+                    if st.session_state.collection_method == "Self-Collect" and st.session_state.specific_location:
+                        st.markdown("#### 📅 Choose Collection Date")
+                        
+                        # Determine required lead days based on location
+                        if "Bishan" in st.session_state.specific_location:
+                            required_days = 7
+                            location_name = "Bishan"
+                        elif "NUS" in st.session_state.specific_location:
+                            required_days = 3
+                            location_name = "NUS"
+                        else:
+                            required_days = 0
+                            location_name = ""
+                        
+                        min_date = datetime.now().date() + timedelta(days=required_days)
+                        help_text = f"For {location_name}, please select a date at least {required_days} days from today."
+                        
+                        selected_date = st.date_input(
+                            "Collection Date",
+                            value=min_date,
+                            min_value=min_date,
+                            help=help_text
+                        )
+                        
+                        # Validate the date
+                        if selected_date >= min_date:
+                            st.session_state.collection_date = selected_date.strftime("%Y-%m-%d")
+                            st.session_state.date_valid = True
+                            st.success(f"✅ Valid date selected. Your collection is scheduled for {selected_date.strftime('%d %b %Y')}.")
+                        else:
+                            st.session_state.collection_date = None
+                            st.session_state.date_valid = False
+                            st.error(f"❌ Please select a date at least {required_days} days in advance (earliest: {min_date.strftime('%d %b %Y')}).")
+                    
+                    # ========== NEW: Time slot picker for Meet-up ==========
+                    if st.session_state.collection_method == "Meet-up" and st.session_state.specific_location:
+                        st.markdown("#### 🕒 Select Preferred Time Slot")
+                        st.markdown("""
+                            <div style="background: rgba(133, 193, 233, 0.15); padding: 0.8rem; border-radius: 12px; margin-bottom: 1rem; font-size: 13px;">
+                                <strong>Available time slots (subject to admin's confirmation):</strong><br>
+                                • Monday & Wednesday: 6pm - 8pm<br>
+                                • Friday: 5pm - 7pm<br>
+                                • Saturday: 10am - 12pm
+                            </div>
+                        """, unsafe_allow_html=True)
+                        
+                        time_slot = st.selectbox(
+                            "Select a time slot",
+                            [
+                                "Monday 6pm - 8pm",
+                                "Wednesday 6pm - 8pm",
+                                "Friday 5pm - 7pm",
+                                "Saturday 10am - 12pm"
+                            ],
+                            index=None,
+                            placeholder="Choose a time slot..."
+                        )
+                        
+                        if time_slot:
+                            st.session_state.meetup_time = time_slot
+                            st.success(f"✅ Time slot selected: {time_slot}")
+                        else:
+                            st.session_state.meetup_time = None
+                    
+                    # Determine if form should be shown
                     show_form = False
                     if st.session_state.collection_method in ["Tracked Envelope", "Tracked Box"]:
                         show_form = True
-                    elif st.session_state.collection_method in ["Self-Collect", "Meet-up"] and st.session_state.specific_location:
+                    elif st.session_state.collection_method == "Self-Collect" and st.session_state.specific_location and st.session_state.date_valid and st.session_state.collection_date:
+                        show_form = True
+                    elif st.session_state.collection_method == "Meet-up" and st.session_state.specific_location and st.session_state.meetup_time:
                         show_form = True
                     
                     if show_form:
@@ -1010,6 +1105,10 @@ if user_input and not st.session_state.submitted:
                             st.text_input("Collection Method", value=st.session_state.collection_method, disabled=True)
                             if st.session_state.specific_location:
                                 st.text_input("Selected Location", value=st.session_state.specific_location, disabled=True)
+                            if st.session_state.collection_date:
+                                st.text_input("Selected Collection Date", value=st.session_state.collection_date, disabled=True)
+                            if st.session_state.meetup_time:
+                                st.text_input("Preferred Meetup Time", value=st.session_state.meetup_time, disabled=True)
                             
                             # Required fields
                             name = st.text_input("Name *", placeholder="Enter your name")
@@ -1073,7 +1172,9 @@ if user_input and not st.session_state.submitted:
                                         'items': ready_items_list,
                                         'amount_paid': f"${amount_to_pay:.2f}",
                                         'transaction_proof': proof_info,
-                                        'note': note if note else "None"
+                                        'note': note if note else "None",
+                                        'collection_date': st.session_state.collection_date if st.session_state.collection_date else "",
+                                        'meetup_time': st.session_state.meetup_time if st.session_state.meetup_time else ""
                                     }
                                     
                                     if save_to_google_sheet(response_data):
@@ -1110,6 +1211,9 @@ elif st.session_state.submitted:
         st.session_state.collection_method = None
         st.session_state.specific_location = None
         st.session_state.show_all_orders = False
+        st.session_state.collection_date = None
+        st.session_state.meetup_time = None
+        st.session_state.date_valid = False
         st.rerun()
 
 else:
