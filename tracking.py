@@ -964,7 +964,8 @@ if user_input and not st.session_state.submitted:
                         st.markdown("""
                             <div style="background: rgba(133, 193, 233, 0.15); padding: 0.8rem; border-radius: 12px; margin-bottom: 1rem; font-size: 13px;">
                                 <strong>📍 Important Notes:</strong><br>
-                                <em>Admin may choose locations near the MRT station.</em>
+                                <em>Admin may choose locations near the MRT station.</em><br>
+                                <em>Please select other collection methods if you are unavailable for any of the time slots!</em>
                             </div>
                         """, unsafe_allow_html=True)
                         loc1, loc2, loc3 = st.columns(3)
