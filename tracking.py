@@ -760,7 +760,7 @@ if user_input and not st.session_state.submitted:
                 user_data['Notification_Date'] = pd.to_datetime(user_data['Notification_Date'], dayfirst=True)
                 today = datetime.now()
                 user_data['Days_Since'] = (today - user_data['Notification_Date']).dt.days
-                user_data['Late_Fee'] = user_data['Days_Since'].apply(lambda x: max(0, (x - 7) * 1) if pd.notnull(x) else 0)
+                user_data['Late_Fee'] = user_data['Days_Since'].apply(lambda x: max(0, (x - 21) * 1) if pd.notnull(x) else 0)
                 user_data['Second_Payment'] = pd.to_numeric(user_data['Second_Payment'], errors='coerce').fillna(0)
                 user_data['Total_Due'] = user_data['Second_Payment'] + user_data['Late_Fee']
                 
