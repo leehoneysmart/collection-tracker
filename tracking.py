@@ -722,6 +722,8 @@ def get_shipping_cost(method):
         return 3.00
     elif method == "Tracked Box":
         return 3.80
+    elif method == "Courier":
+        return 5.50
     else:
         return 0
 
@@ -870,7 +872,7 @@ if user_input and not st.session_state.submitted:
                     st.markdown("---")
                     st.markdown("### 📮 Choose Collection Method")
                     
-                    col_a, col_b, col_c, col_d = st.columns(4)
+                    col_a, col_b, col_c, col_d, col_e = st.columns(5)
                     
                     with col_a:
                         if st.button("📩 Tracked Envelope\n+$3.00", use_container_width=True):
@@ -891,6 +893,15 @@ if user_input and not st.session_state.submitted:
                             st.rerun()
                     
                     with col_c:
+                        if st.button("🚚 Courier\n+$5.50", use_container_width=True):
+                            st.session_state.collection_method = "Courier"
+                            st.session_state.specific_location = None
+                            st.session_state.collection_date = None
+                            st.session_state.meetup_time = None
+                            st.session_state.date_valid = False
+                            st.rerun()
+                    
+                    with col_d:
                         if st.button("🏠 Self-Collect\n", use_container_width=True):
                             st.session_state.collection_method = "Self-Collect"
                             st.session_state.specific_location = None
@@ -899,7 +910,7 @@ if user_input and not st.session_state.submitted:
                             st.session_state.date_valid = False
                             st.rerun()
                     
-                    with col_d:
+                    with col_e:
                         if st.button("🤝 Meet-up\n", use_container_width=True):
                             st.session_state.collection_method = "Meet-up"
                             st.session_state.specific_location = None
@@ -916,6 +927,7 @@ if user_input and not st.session_state.submitted:
                         method_display = {
                             "Tracked Envelope": "📩 Tracked Envelope",
                             "Tracked Box": "📦 Tracked Box",
+                            "Courier": "🚚 Courier",
                             "Self-Collect": "🏠 Self-Collect",
                             "Meet-up": "🤝 Meet-up"
                         }.get(st.session_state.collection_method, st.session_state.collection_method)
@@ -1082,7 +1094,7 @@ if user_input and not st.session_state.submitted:
                     
                     # Determine if form should be shown
                     show_form = False
-                    if st.session_state.collection_method in ["Tracked Envelope", "Tracked Box"]:
+                    if st.session_state.collection_method in ["Tracked Envelope", "Tracked Box", "Courier"]:
                         show_form = True
                     elif st.session_state.collection_method == "Self-Collect" and st.session_state.specific_location and st.session_state.date_valid and st.session_state.collection_date:
                         show_form = True
@@ -1130,7 +1142,7 @@ if user_input and not st.session_state.submitted:
                             phone = st.text_input("Phone Number *", placeholder="e.g., 91234567")
                             
                             # Address - required only for mailing
-                            if st.session_state.collection_method in ["Tracked Envelope", "Tracked Box"]:
+                            if st.session_state.collection_method in ["Tracked Envelope", "Tracked Box", "Courier"]:
                                 address = st.text_area("Full Delivery Address *", placeholder="Enter complete address with postal code", height=80)
                             else:
                                 address = st.text_area("Address (For Mailing)", placeholder="Don't need to input if opted for self-collect/meet-up", height=80)
@@ -1147,7 +1159,7 @@ if user_input and not st.session_state.submitted:
                             st.number_input("Amount Transferred ($)", value=float(amount_to_pay), min_value=0.0, step=0.5, key="amount_paid")
                             
                             # Transaction proof upload
-                            if st.session_state.collection_method in ["Tracked Envelope", "Tracked Box"]:
+                            if st.session_state.collection_method in ["Tracked Envelope", "Tracked Box", "Courier"]:
                                 proof_file = st.file_uploader("Upload Transaction Proof (Screenshot) *", type=['png', 'jpg', 'jpeg', 'pdf'])
                             else:
                                 proof_file = st.file_uploader("Upload Transaction Proof", type=['png', 'jpg', 'jpeg', 'pdf'])
@@ -1165,9 +1177,9 @@ if user_input and not st.session_state.submitted:
                             if submitted:
                                 if not name or not phone or not acknowledge:
                                     st.error("Please fill in all required fields (*)")
-                                elif st.session_state.collection_method in ["Tracked Envelope", "Tracked Box"] and not address:
+                                elif st.session_state.collection_method in ["Tracked Envelope", "Tracked Box", "Courier"] and not address:
                                     st.error("Please provide your delivery address")
-                                elif st.session_state.collection_method in ["Tracked Envelope", "Tracked Box"] and not proof_file:
+                                elif st.session_state.collection_method in ["Tracked Envelope", "Tracked Box", "Courier"] and not proof_file:
                                     st.error("Please upload your transaction proof")
                                 else:
                                     # Prepare data with SGT timestamp
@@ -1254,6 +1266,7 @@ with st.sidebar:
     st.markdown("**Collection Options:**")
     st.markdown("📩 Tracked Envelope: up to 33cm x 24cm ")
     st.markdown("📦 Tracked Box: 30cm x 19cm x 6.5cm **[more secure]**")
+    st.markdown("🚚 Courier: $5.50 flat rate (doorstep delivery)")
     st.markdown("🏠 Self-Collect: NUS | Bishan [for bulky items, only **self-collection** is allowed]")
     st.markdown("🤝 Meet-up at admin's convenience: Clementi | Buona Vista | Kent Ridge MRT")
     st.markdown("---")
